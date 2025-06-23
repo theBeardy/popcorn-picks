@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if film_list %}
+<div class="movie-card">
+    {% for movie in film_list|slice:':10' %}
+    <a class="top-film-link" href="{% url 'filmerate:film_details' movie.id %}" data-item="{{ forloop.counter }}">
+        <div class="poster-wrapper">
+            <img
+                src="{{ movie.poster_url }}"
+                class="top-movies img-fluid rounded-top"
+                alt="Poster image for {{ movie.title }}"
+            />
+            <div class="movie-title-overlay">
+                <p>#{{ forloop.counter }} - {{ movie.title }} ({{ movie.release_year }}) | Overall Rating: {{ movie.average_rating|floatformat:2 }}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No movies in this list.</p>
+{% endif %}
+{% endblock %}

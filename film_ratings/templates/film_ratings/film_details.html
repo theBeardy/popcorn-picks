@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+{% load static %}
+
+    {% block content %}
+      {% if movie.poster_url %}
+      <img
+          src="{{ movie.poster_url }}"
+          class="img-fluid rounded-top"
+          alt="Poster for {{ movie.title }}"
+          style="max-width: 300px;"
+      />
+      {% endif %}
+      <h2>{{ movie.title }} {% if movie.release_year %}({{ movie.release_year }}){% endif %}</h2>
+      <p>Average rating: {{ average_rating|floatformat:2 }}</p>
+
+      {% if movie.description %}
+          <p><strong>Description:</strong> {{ movie.description }}</p>
+      {% endif %}
+
+      {% if latest_review %}
+        <ul>
+          <li>Visuals: {{ latest_review.visuals }}</li>
+          <li>Acting: {{ latest_review.acting }}</li>
+          <li>Meaningfulness: {{ latest_review.thought_provoking }}</li>
+          <li>Dialogue: {{ latest_review.dialog }}</li>
+          <li>Makes Me Cry: {{ latest_review.makes_me_cry }}</li>
+          <li>Execution of Genre: {{ latest_review.genre_execution }}</li>
+          <li>Rewatchability: {{ latest_review.rewatch }}</li>
+          <li>Fun to Watch: {{ latest_review.fun_to_watch }}</li>    
+        </ul>
+      {% else %}
+        <p>No reviews yet for this movie.</p>
+      {% endif %}
+    {% endblock %}
