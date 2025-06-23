@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}    
+    {% for film in user_review_data %}
+        {% if user_review_data %}
+            <h1>{{ film.movie_title }}</h1>
+            <h5>({{ film.movie_title.release_year }})</h5>
+            <img 
+                src="{{ film.movie_title.poster_url }}" 
+                alt="Poster for {{ film.movie_title.title }}"
+            />
+            <h1>Visuals: {{ film.visuals }}</h1>
+        {% else %}
+            <h1>No Reviews Found</h1>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
