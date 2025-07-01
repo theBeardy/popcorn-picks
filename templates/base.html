@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+    <title>{% block title %}Popcorn Picks{% endblock %}</title>
+</head>
+
+<body class="bg-fixed bg-gradient-to-t from-[#52796f] to-[#cad2c5] h-screen">
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul class="flex justify-center items-center h-[50px]">
+            <li class='text-center underline bg-blue-200 text-white ml-5 rounded-sm h-[25px]'><a href="/">Home</a></li>
+            <li class='text-center underline bg-green-800 text-white ml-5 rounded-sm h-[25px]'><a href="/film_ratings/movie_form/">Film Review</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
