@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <h1>User Login</h1>
-    <form class="form-with-validation" action="/users/login/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        {% if request.GET.next %}
-            <input type="hidden" name="next" value="{{ request.GET.next }}" />
-        {% endif %}
-        <button>Submit</button>
-    </form>
+    <div class="flex items-center justify-center h-screen">
+        <form class="form-with-validation" action="/users/login/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}" />
+            {% endif %}
+            <button>Submit</button>
+        </form>
+    </div>
 {% endblock %}
