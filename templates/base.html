@@ -7,11 +7,11 @@
 </head>
 
 <body class="bg-fixed bg-gradient-to-t from-[#52796f] to-[#cad2c5] h-screen">
-    <div id="sidebar">
+    <div id="sidebar" class="fixed bg-[#354f52] w-full h-[60px] shadow">
         {% block sidebar %}
-        <ul class="flex justify-center items-center h-[50px]">
-            <li class='text-center underline bg-blue-200 text-white ml-5 rounded-sm h-[25px]'><a href="/">Home</a></li>
-            <li class='text-center underline bg-green-800 text-white ml-5 rounded-sm h-[25px]'><a href="/film_ratings/movie_form/">Film Review</a></li>
+        <ul class="flex justify-center h-full bg-opacity-50">
+            <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full"><a href="/">Home</a></li>
+            <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full"><a href="/film_ratings/movie_form/">Film Review</a></li>
         </ul>
         {% endblock %}
     </div>
