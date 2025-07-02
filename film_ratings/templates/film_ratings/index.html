@@ -2,24 +2,28 @@
 
 {% block content %}
 
+<h1 class="text-4xl text-center mt-8">Top 10 Films by Average Rating</h1>
+
 {% if film_list %}
-<div class="movie-card">
-    {% for movie in film_list|slice:':10' %}
-    <a class="top-film-link" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
-        <div class="poster-wrapper">
-            <img
-                src="{{ movie.poster_url }}"
-                class="top-movies img-fluid rounded-top"
-                alt="Poster image for {{ movie.title }}"
-            />
-            <div class="movie-title-overlay">
-                <p>#{{ forloop.counter }} - {{ movie.title }} ({{ movie.release_year }}) | Overall Rating: {{ movie.average_rating|floatformat:2 }}</p>
+<div class="flex justify-center pt-[40px]">
+    <div class="grid grid-cols-3 w-[200px] gap-6 md:grid-cols-5 md:w-[1000px] md:h-[100px] md:gap-6">
+        {% for movie in film_list|slice:':10' %}
+        <a class="text-[12px] md:h-[300px]" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
+            <div class="">
+                <img
+                    src="{{ movie.poster_url }}"
+                    class="h-[150px] w-auto object-cover md:h-[250px]"
+                    alt="Poster image for {{ movie.title }}"
+                />
+                <div class="movie-title-overlay">
+                    <p>#{{ forloop.counter }} - {{ movie.title }} ({{ movie.release_year }}) | Overall Rating: {{ movie.average_rating|floatformat:2 }}</p>
+                </div>
             </div>
-        </div>
-    </a>
-    {% endfor %}
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No movies in this list.</p>
+    {% endif %}
 </div>
-{% else %}
-    <p>No movies in this list.</p>
-{% endif %}
 {% endblock %}
