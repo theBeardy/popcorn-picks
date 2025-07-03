@@ -4,9 +4,10 @@
     },
     "scripts": {
         "watch:css": "npx @tailwindcss/cli -i ./static/src/styles.css -o ./static/dist/styles.css --watch",
-        "build": "npx tailwindcss -i ./static/src/styles.css -o ./static/dist/styles.css --minify"
+        "build": "node ./node_modules/tailwindcss/lib/cli.js -i ./static/src/styles.css -o ./static/dist/styles.css --minify",
+        "postinstall": "chmod +x ./node_modules/.bin/tailwindcss || true"
     },
     "devDependencies": {
-        "tailwindcss": "^4.x.x"
+        "tailwindcss": "^4.1.11"
     }
 }
