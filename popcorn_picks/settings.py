@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-)&x62=k$*(bh*0-!derm)v1jpg$s0murk=_qw-c4_-saa!b5$*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['popcorn-picks-38lb.onrender.com']
 
 
 # Application definition
