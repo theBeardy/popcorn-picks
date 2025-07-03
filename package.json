@@ -4,10 +4,11 @@
     },
     "scripts": {
         "watch:css": "npx @tailwindcss/cli -i ./static/src/styles.css -o ./static/dist/styles.css --watch",
-        "build": "npx tailwindcss -i ./static/src/styles.css -o ./static/dist/styles.css --minify",
-        "postinstall": "chmod +x ./node_modules/.bin/tailwindcss || true"
+        "postinstall": "chmod +x ./node_modules/.bin/tailwindcss",
+        "build": "npm run build:css",
+        "build:css": "npx tailwindcss -i ./static/src/styles.css -o ./static/dist/styles.css --minify"
     },
     "devDependencies": {
-        "tailwindcss": "^4.1.11"
+        "tailwindcss": "^4.1.0"
     }
 }
