@@ -7,6 +7,6 @@
         "build": "npx tailwindcss -i ./static/src/styles.css -o ./static/dist/styles.css --minify"
     },
     "devDependencies": {
-        "tailwindcss": "^4.1.11"
+        "tailwindcss": "^4.x.x"
     }
 }
