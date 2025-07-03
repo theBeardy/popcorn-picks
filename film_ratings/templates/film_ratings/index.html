@@ -15,7 +15,7 @@
                     class="h-[150px] w-auto object-cover md:h-[250px]"
                     alt="Poster image for {{ movie.title }}"
                 />
-                <div class="movie-title-overlay">
+                <div class="">
                     <p>#{{ forloop.counter }} - {{ movie.title }} ({{ movie.release_year }}) | Overall Rating: {{ movie.average_rating|floatformat:2 }}</p>
                 </div>
             </div>
