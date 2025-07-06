@@ -1,19 +1,49 @@
-{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-    <title>Django Tailwind</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-	</head>
+{% load static tailwind_tags %}
+<head>
+    <title>{% block title %}Popcorn Picks{% endblock %}</title>
+	{% tailwind_css %}
+</head>
 
-	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
-		<div class="container mx-auto">
-			<section class="flex items-center justify-center h-screen">
-				<h1 class="text-5xl">Django + Tailwind = ❤️</h1>
-			</section>
-		</div>
-	</body>
+<body class="bg-fixed bg-gradient-to-t from-[#52796f] to-[#cad2c5] h-screen">
+    <div id="navbar" class="fixed bg-[#354f52] w-full h-[60px] shadow">
+        {% block sidebar %}
+        <div class="flex justify-between items-center h-full px-4">
+            <!-- Left side navigation -->
+            <ul class="flex space-x-2">
+                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                    <a href="/">Home</a>
+                </li>
+                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                    <a href="/film_ratings/movie_form/">Film Review</a>
+                </li>
+            </ul>
+
+            <!-- Right side authentication -->
+            <ul class="flex space-x-2">
+                {% if user.is_authenticated %}
+                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                    <form action="{% url 'users:logout_view' %}" method='post'>
+                        {% csrf_token %}
+                        <button title="User Logout">Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                    <a href="{% url 'users:login_view' %}">Login</a>
+                </li>
+                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                    <a href="{% url 'users:register_view' %}">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endblock %}
+    </div>
+    <h1 class="text-4xl font-bold text-red-500">If you see me red, Tailwind works!</h1>
+    <div id="content" class="pt-[60px]">
+        {% block content %}{% endblock %}
+    </div>
+</body>
 </html>
