@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h1 class="text-4xl text-center mt-8">Top 10 Films by Average Rating</h1>
+<h1 class="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Top 10 Films by Average Rating</h1>
 
 {% if film_list %}
 <div class="flex justify-center pt-[40px]">
     <div class="grid grid-cols-3 w-[200px] gap-6 md:grid-cols-5 md:w-[1000px] md:h-[100px] md:gap-6">
         {% for movie in film_list|slice:':10' %}
-        <a class="text-[12px] md:h-[300px]" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
+        <a class="text-[12px] md:h-[300px] text-gray-400 hover:text-gray-200 hover:scale-110 duration-200" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
             <div class="">
                 <img
                     src="{{ movie.poster_url }}"

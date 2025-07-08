@@ -3,34 +3,39 @@
 {% block content %}
     <h1 class="text-center text-3xl text-white h-[70px]">On a scale of 1-10, how do you feel about the following aspects of this film?</h1>
     <div class="flex justify-center">
-        <form method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6 w-3xl">
+        <form method="post" class="">
             {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-3xl">
+                <div class="md:col-span-2">
+                    <label for="{{ form.movie_title.id_for_label }}" class="block text-2xl text-center font-semibold text-yellow-200 mb-[10px]">
+                        {{ form.movie_title.label }}
+                    </label>
+                    {{ form.movie_title }}
+                    {% if form.movie_title.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.movie_title.errors }}</p>
+                    {% endif %}
+                </div>
 
-            <div class="md:col-span-2">
-                <label for="{{ form.movie_title.id_for_label }}" class="block text-2xl text-center font-semibold text-yellow-200 mb-[10px]">
-                    {{ form.movie_title.label }}
-                </label>
-                {{ form.movie_title }}
-                {% if form.movie_title.errors %}
-                    <p class="text-red-500 text-sm mt-1">{{ form.movie_title.errors }}</p>
-                {% endif %}
-            </div>
-
-            {% for field in form %}
-                {% if field.name != 'movie_title' %}
-                    <div>
-                        <label for="{{ field.id_for_label }}" class="flex justify-center text-lg font-medium text-white">
-                            {{ field.label }}
-                        </label>
-                        {{ field }}
-                        {% if field.errors %}
-                            <p class="text-red-500 text-sm mt-1">{{ field.errors }}</p>
-                        {% endif %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-            <div class="md:col-span-2">
-                <button type="submit" class="w-full mt-[15px] px-4 py-2 text-2xl bg-gray-300 hover:text-gray-300 hover:bg-[#2f3e46] rounded duration-350">Submit</button>
+                {% for field in form %}
+                    {% if field.name != 'movie_title' and field.name != 'average' and field.name != 'recommend' %}
+                        <div>
+                            <label for="{{ field.id_for_label }}" class="flex justify-center text-lg font-medium text-white">
+                                {% if field.label == "Fun_to_watch" %}
+                                    This film is fun to watch
+                                {% else %}
+                                    {{ field.label }}
+                                {% endif %}
+                            </label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <p class="text-red-500 text-sm mt-1">{{ field.errors }}</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            <div class="flex justify-center mt-[50px]">
+                <button type="submit" class="w-[200px] text-white bg-gradient-to-r from-[#cad2c5] via-[#84a98c] to-[#52796f] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Submit</button>
             </div>
         </form>
     </div>

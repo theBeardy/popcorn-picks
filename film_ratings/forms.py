@@ -19,7 +19,7 @@ class MovieForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             if field_name != 'movie_title':
                 field.widget.attrs.update({
-                    'class': 'w-full px-4 py-2 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    'class': 'text-center bg-[#354F52] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#354F52] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 })
             else:
                 field.widget.attrs.update({
