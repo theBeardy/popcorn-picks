@@ -2,7 +2,10 @@ from django import forms
 from .models import Review
 
 class MovieForm(forms.ModelForm):
-    movie_title = forms.CharField(label="Movie Title", max_length=255)
+    movie_title = forms.CharField(
+        label="Movie Title", 
+        max_length=255,
+    )
 
     class Meta:
         model = Review
@@ -11,5 +14,14 @@ class MovieForm(forms.ModelForm):
     # Optionally: to hide default model field so no conflict
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if 'movie_title' in self.fields:
-            self.fields['movie_title'].widget.attrs.update({'placeholder': 'Start typing a movie title...'})
+        i=0
+        
+        for field_name, field in self.fields.items():
+            if field_name != 'movie_title':
+                field.widget.attrs.update({
+                    'class': 'w-full px-4 py-2 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
+                })
+            else:
+                field.widget.attrs.update({
+                    'class': 'w-full text-center px-4 py-2 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
+                })
