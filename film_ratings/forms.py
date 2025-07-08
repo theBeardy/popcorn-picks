@@ -23,5 +23,5 @@ class MovieForm(forms.ModelForm):
                 })
             else:
                 field.widget.attrs.update({
-                    'class': 'w-full text-center px-4 py-2 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    'class': 'text-center bg-[#354F52] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#354F52] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 })
