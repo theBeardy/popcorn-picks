@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import platform
 
 TMDB_API_KEY = config('TMDB_API_KEY')
 
@@ -131,7 +132,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+if platform.system() == "Windows":
+    NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"  # adjust for your Windows path
+elif platform.system() == "Linux":
+    NPM_BIN_PATH = "/usr/bin/npm"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
