@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
-import platform
+import platform, os
 
 TMDB_API_KEY = config('TMDB_API_KEY')
 
@@ -142,13 +142,11 @@ elif platform.system() == "Linux":
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR / "theme"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "theme" / "static_src"
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'theme', 'static')]
