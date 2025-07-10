@@ -1,54 +1,64 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
 {% load static %}
+{% block content %}
+  <div class="flex flex-col lg:flex-row justify-center items-start gap-10 p-6 mt-10">
+    
+    {% if movie.poster_url %}
+    <img
+      src="{{ movie.poster_url }}"
+      class="w-full max-w-xs lg:max-w-sm rounded-lg shadow-xl dark:shadow-gray-800"
+      alt="Poster for {{ movie.title }}"
+    />
+    {% endif %}
 
-    {% block content %}
-      <div class="flex justify-center items-center">
-        {% if movie.poster_url %}
-        <img
-            src="{{ movie.poster_url }}"
-            class="h-[50%] mr-[40px] max-w-xl rounded-lg shadow-xl dark:shadow-gray-800"
-            alt="Poster for {{ movie.title }}"
-        />
+    <div class="w-full max-w-2xl">
+      <!-- Title and Year -->
+      <div class="flex flex-wrap items-end mb-4">
+        <h2 class="text-6xl font-default font-extrabold leading-none tracking-tight text-[var(--light-text)] dark:text-[var(--dark-text)] mr-4">
+          {{ movie.title }}
+        </h2>
+        {% if movie.release_year %}
+        <p class="text-3xl font-default font-normal text-[var(--light-text)] dark:text-[var(--dark-text-2)]">
+          ({{ movie.release_year }})
+        </p>
         {% endif %}
-        <div class="w-[500px]">
-          <div class="flex items-end">
-            <h2 class="inline mb-4 mr-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ movie.title }}</h2>
-            <p class="mb-6 text-2xl font-normal text-gray-500 lg:text-xl dark:text-gray-400">{% if movie.release_year %}({{ movie.release_year }}){% endif %}</p>
-          </div>
-          <!-- Gauge for Average Rating -->
-          <div class="relative size-40">
-            <svg class="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-              <!-- Background Circle (Gauge) -->
-              <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-purple-200 dark:text-neutral-700" stroke-width="1" stroke-dasharray="75 100"></circle>
+      </div>
 
-              <!-- Gauge Progress -->
-              <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-[var(--theme-color-4)] dark:text-[var(--theme-color-4)]" stroke-width="2" stroke-dasharray="{% widthratio average_rating 10 75 %} 100"></circle>
-            </svg>
-
-            <!-- Value Text -->
-            <div class="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-              <span class="text-4xl font-comfortaa text-[var(--theme-color-4)] dark:text-[var(--theme-color-4)]">{{ average_rating | floatformat:2 }}</span>
-            </div>
-          </div>
-          {% if movie.description %}
-              <p class="max-w-md mb-[25px] space-y-1 text-gray-500 list-none list-inside dark:text-gray-400"><strong>Description:</strong> {{ movie.description }}</p>
-          {% endif %}
-
-          {% if latest_review %}
-            <ul class="max-w-md space-y-1 font-figtree text-gray-500 list-none list-inside dark:text-gray-400">
-              <li>Visuals: {{ latest_review.visuals }}</li>
-              <li>Acting: {{ latest_review.acting }}</li>
-              <li>Meaningfulness: {{ latest_review.thought_provoking }}</li>
-              <li>Dialogue: {{ latest_review.dialog }}</li>
-              <li>Makes Me Cry: {{ latest_review.makes_me_cry }}</li>
-              <li>Execution of Genre: {{ latest_review.genre_execution }}</li>
-              <li>Rewatchability: {{ latest_review.rewatch }}</li>
-              <li>Fun to Watch: {{ latest_review.fun_to_watch }}</li>    
-            </ul>
-          {% else %}
-            <p>No reviews yet for this movie.</p>
-          {% endif %}
+      <!-- Gauge for Average Rating -->
+      <div class="relative w-40 h-40 mb-6">
+        <svg class="rotate-[135deg] w-full h-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-[var(--accent-light)] dark:text-[var(--accent-dark)]" stroke-width="1" stroke-dasharray="75 100"></circle>
+          <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-[var(--light-4)] dark:text-[var(--dark-4)]" stroke-width="2" stroke-dasharray="{% widthratio average_rating 10 75 %} 100"></circle>
+        </svg>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <span class="text-4xl font-comfortaa text-[var(--light-text)] dark:text-[var(--dark-text)]">
+            {{ average_rating | floatformat:1 }}
+          </span>
         </div>
       </div>
-    {% endblock %}
+
+      <!-- Description -->
+      {% if movie.description %}
+      <p class="mb-6 text-[var(--light-text)] dark:text-[var(--dark-text)]">
+        <strong>Description:</strong> {{ movie.description }}
+      </p>
+      {% endif %}
+
+      <!-- Latest Review -->
+      {% if latest_review %}
+      <ul class="space-y-2 font-figtree text-[var(--light-text)] dark:text-[var(--dark-text)]">
+        <li>Visuals: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.visuals }}</span></li>
+        <li>Acting: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.acting }}</span></li>
+        <li>Meaningfulness: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.thought_provoking }}</span></li>
+        <li>Dialogue: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.dialog }}</span></li>
+        <li>Makes Me Cry: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.makes_me_cry }}</span></li>
+        <li>Execution of Genre: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.genre_execution }}</span></li>
+        <li>Rewatchability: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.rewatch }}</span></li>
+        <li>Fun to Watch: <span class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]">{{ latest_review.fun_to_watch }}</span></li>
+      </ul>
+      {% else %}
+      <p class="text-[var(--light-text)] dark:text-[var(--dark-text)]">No reviews yet for this movie.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %}    
-    {% for film in user_review_data %}
-        {% if user_review_data %}
-            <h1>{{ film.movie_title }}</h1>
-            <h5>({{ film.movie_title.release_year }})</h5>
-            <img 
-                src="{{ film.movie_title.poster_url }}" 
-                alt="Poster for {{ film.movie_title.title }}"
-            />
-            <h1>Visuals: {{ film.visuals }}</h1>
-        {% else %}
-            <h1>No Reviews Found</h1>
-        {% endif %}
-    {% endfor %}
+{% block content %}
+  <div class="p-8">
+    <h1 class="text-3xl font-bold text-[var(--light-text)] dark:text-[var(--dark-text)] mb-6">Your Reviewed Films</h1>
+
+    {% if user_review_data %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for film in user_review_data %}
+        <div class="bg-[var(--light-bg)] dark:bg-[var(--dark-bg)] rounded-lg p-4">
+          <img 
+            src="{{ film.movie_title.poster_url }}" 
+            alt="Poster for {{ film.movie_title.title }}"
+            class="w-60 h-auto rounded drop-shadow-sm"
+          />
+          <h2 class="font-default text-xl font-semibold text-[var(--light-text)] dark:text-[var(--dark-text)] mt-2">{{ film.movie_title.title }}
+            {% if film.movie_title.release_year %}
+            <p class="inline text-sm text-[var(--light-text-2)] dark:text-[var(--dark-text-2)] mb-2">({{ film.movie_title.release_year }})</p>
+            {% endif %}
+          </h2>
+          <p class="text-[var(--accent-light)] dark:text-[var(--dark-text)]">Avg Rating: {{ film.average_score|floatformat:1 }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="text-white">No Reviews Found.</p>
+    {% endif %}
+  </div>
 {% endblock %}

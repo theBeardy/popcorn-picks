@@ -2,20 +2,20 @@
 
 {% block content %}
 
-<h1 class="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Top 10 Films by Average Rating</h1>
+<h1 class="m-16 text-4xl text-center font-alt font-extrabold leading-none tracking-tight text-[var(--light-text)] md:text-5xl lg:text-6xl dark:text-[var(--dark-text)]">Top 10 Films by Average Rating</h1>
 
 {% if film_list %}
-<div class="flex justify-center pt-[40px]">
+<div class="flex justify-center">
     <div class="grid grid-cols-3 w-[200px] gap-6 md:grid-cols-5 md:w-[1000px] md:h-[100px] md:gap-6">
         {% for movie in film_list|slice:':10' %}
-        <a class="text-[12px] md:h-[300px] text-gray-400 hover:text-gray-200 hover:scale-110 duration-200" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
+        <a class="text-[12px] md:h-[300px] text-[var(--light-text-2)] hover:text-[var(--light-text)] dark:text-[var(--dark-text-2)] dark:hover:text-[var(--dark-text)] hover:scale-105 duration-290" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
             <div class="">
                 <img
                     src="{{ movie.poster_url }}"
-                    class="h-[150px] w-auto object-cover md:h-[250px]"
+                    class="h-[150px] w-auto object-cover md:h-[250px] rounded-md border-5 border-[var(--accent-light)] dark:border-[var(--accent-dark)]"
                     alt="Poster image for {{ movie.title }}"
                 />
-                <div class="">
+                <div class="font-default text-md">
                     <p>#{{ forloop.counter }} - {{ movie.title }} ({{ movie.release_year }}) | Overall Rating: {{ movie.average_rating|floatformat:2 }}</p>
                 </div>
             </div>
