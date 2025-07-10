@@ -3,24 +3,40 @@
 {% load static %}
 
     {% block content %}
-      <div class="flex flex-col justify-center items-center">
+      <div class="flex justify-center items-center">
         {% if movie.poster_url %}
         <img
             src="{{ movie.poster_url }}"
-            class="mt-[100px] img-fluid w-[250px]"
+            class="h-[50%] mr-[40px] max-w-xl rounded-lg shadow-xl dark:shadow-gray-800"
             alt="Poster for {{ movie.title }}"
         />
         {% endif %}
         <div class="w-[500px]">
-          <h2 class="text-5xl mb-[20px]">{{ movie.title }} {% if movie.release_year %}({{ movie.release_year }}){% endif %}</h2>
-          <p>Average rating: {{ average_rating|floatformat:2 }}</p>
+          <div class="flex items-end">
+            <h2 class="inline mb-4 mr-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ movie.title }}</h2>
+            <p class="mb-6 text-2xl font-normal text-gray-500 lg:text-xl dark:text-gray-400">{% if movie.release_year %}({{ movie.release_year }}){% endif %}</p>
+          </div>
+          <!-- Gauge for Average Rating -->
+          <div class="relative size-40">
+            <svg class="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background Circle (Gauge) -->
+              <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-purple-200 dark:text-neutral-700" stroke-width="1" stroke-dasharray="75 100"></circle>
 
+              <!-- Gauge Progress -->
+              <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-[var(--theme-color-4)] dark:text-[var(--theme-color-4)]" stroke-width="2" stroke-dasharray="{% widthratio average_rating 10 75 %} 100"></circle>
+            </svg>
+
+            <!-- Value Text -->
+            <div class="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+              <span class="text-4xl font-comfortaa text-[var(--theme-color-4)] dark:text-[var(--theme-color-4)]">{{ average_rating | floatformat:2 }}</span>
+            </div>
+          </div>
           {% if movie.description %}
-              <p><strong>Description:</strong> {{ movie.description }}</p>
+              <p class="max-w-md mb-[25px] space-y-1 text-gray-500 list-none list-inside dark:text-gray-400"><strong>Description:</strong> {{ movie.description }}</p>
           {% endif %}
 
           {% if latest_review %}
-            <ul>
+            <ul class="max-w-md space-y-1 font-figtree text-gray-500 list-none list-inside dark:text-gray-400">
               <li>Visuals: {{ latest_review.visuals }}</li>
               <li>Acting: {{ latest_review.acting }}</li>
               <li>Meaningfulness: {{ latest_review.thought_provoking }}</li>

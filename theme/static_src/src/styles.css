@@ -1,7 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Figtree:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
 @import "tailwindcss";
 
 @theme {
-  --font-bold: Poppins, sans-serif;
+  --font-figtree: Figtree, sans-serif;
+  --font-comfortaa: Comfortaa, sans-serif;
+  --theme-color-1: #84a98c;
+  --theme-color-2: #52796f;
+  --theme-color-3: #354f52;
+  --theme-color-4: #cad2c5;
+  --theme-color-5: #2f3e46;
 }
 
 /**

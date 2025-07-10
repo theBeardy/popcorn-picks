@@ -12,10 +12,10 @@
         <div class="flex justify-between items-center h-full px-4">
             <!-- Left side navigation -->
             <ul class="flex space-x-2">
-                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                <li class="flex items-center bg-[var(--theme-color-5)] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
                     <a href="/">Home</a>
                 </li>
-                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                <li class="flex items-center bg-[var(--theme-color-5)] text-white px-4 py-1 hover:bg-[var(--theme-color-1)] hover:text-black h-full">
                     <a href="/film_ratings/movie_form/">Film Review</a>
                 </li>
             </ul>
@@ -23,17 +23,17 @@
             <!-- Right side authentication -->
             <ul class="flex space-x-2">
                 {% if user.is_authenticated %}
-                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                <li class="flex items-center bg-[var(--theme-color-5)] text-white px-4 py-1 hover:bg-[var(--theme-color-1)] hover:text-black h-full">
                     <form action="{% url 'users:logout_view' %}" method='post'>
                         {% csrf_token %}
                         <button title="User Logout">Logout</button>
                     </form>
                 </li>
                 {% else %}
-                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                <li class="flex items-center bg-[var(--theme-color-5)] text-white px-4 py-1 hover:bg-[var(--theme-color-1)] hover:text-black h-full">
                     <a href="{% url 'users:login_view' %}">Login</a>
                 </li>
-                <li class="flex items-center bg-[#2f3e46] text-white px-4 py-1 hover:bg-[#84a98c] hover:text-black h-full">
+                <li class="flex items-center bg-[var(--theme-color-5)] text-white px-4 py-1 hover:bg-[var(--theme-color-1)] hover:text-black h-full">
                     <a href="{% url 'users:register_view' %}">Register</a>
                 </li>
                 {% endif %}
