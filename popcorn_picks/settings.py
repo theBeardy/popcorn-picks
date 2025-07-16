@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-)&x62=k$*(bh*0-!derm)v1jpg$s0murk=_qw-c4_-saa!b5$*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['popcornpicks.com','www.popcornpicks.com','popcorn-picks-38lb.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = ['50.116.37.144','popcorn-picks.com','www.popcorn-picks.com']
 
 
 # Application definition
