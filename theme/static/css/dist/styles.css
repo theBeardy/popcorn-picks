@@ -1,8 +1,10 @@
 /*! tailwindcss v4.1.11 | MIT License | https://tailwindcss.com */
 @import url(https://fonts.googleapis.com/css?family=Figtree:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Paytone+One:regular);
 @import url(https://fonts.googleapis.com/css?family=Cal+Sans:regular);
 @import url(https://fonts.googleapis.com/css?family=Ultra:regular);
+@import url(https://fonts.googleapis.com/css?family=Tilt+Warp:regular);
 @import url(https://fonts.googleapis.com/css?family=Spectral:200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic);
 @layer properties;
 @layer theme, base, components, utilities;
@@ -25,7 +27,6 @@
     --container-md: 28rem;
     --container-2xl: 42rem;
     --container-3xl: 48rem;
-    --container-5xl: 64rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-lg: 1.125rem;
@@ -54,7 +55,7 @@
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-default: Cal Sans, sans-serif;
-    --font-alt: Comfortaa, sans-serif;
+    --font-alt: Paytone One, sans-serif;
     --font-logo: Ultra, serif;
     --dark-bg: #38040E;
     --dark-2: #640D14;
@@ -477,9 +478,6 @@
   .place-items-center {
     place-items: center;
   }
-  .items-baseline {
-    align-items: baseline;
-  }
   .items-center {
     align-items: center;
   }
@@ -523,6 +521,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .overflow-x-hidden {
+    overflow-x: hidden;
   }
   .overflow-x-scroll {
     overflow-x: scroll;
@@ -803,18 +804,8 @@
     outline-style: none;
   }
   @media (width >= 40rem) {
-    .sm\:w-\[200px\] {
-      width: 200px;
-    }
-  }
-  @media (width >= 40rem) {
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (width >= 40rem) {
-    .sm\:grid-cols-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   @media (width >= 48rem) {
@@ -873,18 +864,8 @@
     }
   }
   @media (width >= 48rem) {
-    .md\:w-5xl {
-      width: var(--container-5xl);
-    }
-  }
-  @media (width >= 48rem) {
     .md\:w-\[450px\] {
       width: 450px;
-    }
-  }
-  @media (width >= 48rem) {
-    .md\:w-\[500px\] {
-      width: 500px;
     }
   }
   @media (width >= 48rem) {
@@ -935,13 +916,6 @@
     }
   }
   @media (width >= 48rem) {
-    :where(.md\:space-x-3 > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 3) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
-  @media (width >= 48rem) {
     .md\:text-2xl {
       font-size: var(--text-2xl);
       line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -960,6 +934,41 @@
     }
   }
   @media (width >= 64rem) {
+    .lg\:static {
+      position: static;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:top-0 {
+      top: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:right-0 {
+      right: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:left-0 {
+      left: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:flex {
+      display: flex;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:h-16 {
+      height: calc(var(--spacing) * 16);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:w-\[450px\] {
+      width: 450px;
+    }
+  }
+  @media (width >= 64rem) {
     .lg\:max-w-sm {
       max-width: var(--container-sm);
     }
@@ -975,6 +984,23 @@
     }
   }
   @media (width >= 64rem) {
+    .lg\:justify-between {
+      justify-content: space-between;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:justify-center {
+      justify-content: center;
+    }
+  }
+  @media (width >= 64rem) {
+    :where(.lg\:space-x-2 > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
+  @media (width >= 64rem) {
     .lg\:overflow-visible {
       overflow: visible;
     }
@@ -983,6 +1009,58 @@
     .lg\:text-6xl {
       font-size: var(--text-6xl);
       line-height: var(--tw-leading, var(--text-6xl--line-height));
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:static {
+      position: static;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:top-0 {
+      top: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:right-0 {
+      right: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:left-0 {
+      left: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:flex {
+      display: flex;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:h-16 {
+      height: calc(var(--spacing) * 16);
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:w-\[450px\] {
+      width: 450px;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:justify-between {
+      justify-content: space-between;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:justify-center {
+      justify-content: center;
+    }
+  }
+  @media (width >= 80rem) {
+    :where(.xl\:space-x-2 > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   @media (prefers-color-scheme: dark) {

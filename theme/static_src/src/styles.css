@@ -1,13 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Figtree:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Paytone+One:regular);
 @import url(https://fonts.googleapis.com/css?family=Cal+Sans:regular);
 @import url(https://fonts.googleapis.com/css?family=Ultra:regular);
+@import url(https://fonts.googleapis.com/css?family=Tilt+Warp:regular);
 @import url(https://fonts.googleapis.com/css?family=Spectral:200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic);
 @import "tailwindcss";
 
 @theme {
   --font-default: Cal Sans, sans-serif;
-  --font-alt: Comfortaa, sans-serif;
+  --font-alt: Paytone One, sans-serif;
   --font-serif: Spectral, serif;
   --font-logo: Ultra, serif;
   --dark-bg: #38040E;
