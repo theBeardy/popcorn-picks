@@ -43,7 +43,7 @@
                 <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <form action="{% url 'users:logout_view' %}" method='post'>
                         {% csrf_token %}
-                        <button title="User Logout">Logout</button>
+                        <button title="User Logout"><i class="fa-solid fa-right-from-bracket"></i><p class="hidden sm:visible sm:inline ml-1">Logout</p></button>
                     </form>
                 </li>
                 {% else %}
