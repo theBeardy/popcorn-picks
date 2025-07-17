@@ -53,34 +53,8 @@
         </div>
         {% endblock %}
     </nav>
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[var(--light-2)] dark:bg-[var(--dark-2)] h-16 shadow">
-        <ul class="flex justify-around items-center h-full text-sm text-[var(--light-text)] dark:text-[var(--dark-text)]">
-            <li><a href="/" class="hover:underline">Home</a></li>
-            <li><a href="/film_ratings/movie_form/" class="hover:underline">Review</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'users:dashboard' %}" class="hover:underline">My Films</a></li>
-            <li>
-                <form action="{% url 'users:logout_view' %}" method='post'>
-                    {% csrf_token %}
-                    <button class="hover:underline">Logout</button>
-                </form>
-            </li>
-            {% else %}
-            <li><a href="{% url 'users:login_view' %}" class="hover:underline">Login</a></li>
-            <li><a href="{% url 'users:register_view' %}" class="hover:underline">Register</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-
-    <!-- Content container with 2-column layout on small screens -->
-    <div id="content" class="pt-16 md:pt-[60px] pb-20 md:pb-0 px-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div id="content" class="pt-[60px]">
         {% block content %}{% endblock %}
     </div>
-
-    <style>
-        .nav-btn {
-            @apply flex items-center font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm;
-        }
-    </style>
 </body>
 </html>
