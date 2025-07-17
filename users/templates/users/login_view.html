@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="grid w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+    <div class="grid w-full place-items-center rounded-lg p-6 lg:overflow-visible">
       <img
         class="h-50 object-center rounded-lg"
         src="{% static 'pcpicksLOGO.png' %}"
         alt="PopCornPicks Logo"
       />
-      <div class="font-default text-3xl text-[var(--light-text)] text-shadow-black dark:text-[var(--dark-text)]">
+      <div class="font-default text-center text-4xl md:text-3xl text-[var(--light-text)] text-shadow-sm dark:text-[var(--dark-text)]">
         Login to {% if request.GET.next %} Rate a New Film {% else %} See Your Personal Film Ratings {% endif %}
       </div>
     </div>
     <div class="flex items-center justify-center">
-        <form class="w-2xl" action="/users/login/" method="post">
+        <form class="w-md md:w-2xl" action="/users/login/" method="post">
             {% csrf_token %}
             {% for field in form %}
-            <label class="text-lg font-default font-medium text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]" for="{{ field.id_for_label }}">
+            <label class="text-xl md:text-2xl font-default font-medium text-[var(--light-text-2)] dark:text-[var(--dark-text-2)]" for="{{ field.id_for_label }}">
                 {{ field.label }}
             </label>
             {{ field }}

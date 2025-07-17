@@ -7,20 +7,20 @@
 </head>
 
 <body class="bg-fixed bg-[var(--light-bg)] text-[var(--light-text-2)] dark:text-[var(--dark-text-2)] dark:bg-[var(--dark-bg)] h-screen">
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 h-16 bg-[var(--light-2)] dark:bg-[var(--dark-2)] dark:text-[var(--dark-text)] w-full shadow">
+    <nav id="navbar" class="fixed bottom-0 left-0 right-0 h-12 md:top-0 md:left-0 md:right-0 z-50 md:h-16 bg-[var(--light-2)] dark:bg-[var(--dark-2)] dark:text-[var(--dark-text)] w-full shadow">
         {% block sidebar %}
-        <div class="flex justify-between items-center h-full px-4">
+        <div class="flex justify-center md:justify-between items-center h-full px-4">
             <!-- Left side navigation -->
-            <ul class="flex space-x-2">
-                <li class="flex items-center font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+            <ul class="flex md:space-x-2">
+                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <a href="/">Home</a>
                 </li>
-                <li class="flex items-center font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <a href="/film_ratings/movie_form/">Film Review</a>
                 </li>
             </ul>
 
-            <div class="flex space-x-3 items-center">
+            <div class="fixed top-0 flex justify-center h-14 w-full bg-[var(--light-2)] dark:bg-[var(--dark-2)] md:flex md:space-x-3 items-center">
                 <img 
                     src="{% static 'pcpicksLOGO.png' %}" 
                     alt="PopCornPicks Logo"
@@ -30,22 +30,22 @@
             </div>
 
             <!-- Right side authentication -->
-            <ul class="flex space-x-2">
+            <ul class="flex md:space-x-2">
                 {% if user.is_authenticated %}
-                <li class="flex items-center font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <a href="{% url 'users:dashboard' %}">My Rated Films</a>
                 </li>
-                <li class="flex items-center font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <form action="{% url 'users:logout_view' %}" method='post'>
                         {% csrf_token %}
                         <button title="User Logout">Logout</button>
                     </form>
                 </li>
                 {% else %}
-                <li class="flex items-center font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <a href="{% url 'users:login_view' %}">Login</a>
                 </li>
-                <li class="flex items-center font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <a href="{% url 'users:register_view' %}">Register</a>
                 </li>
                 {% endif %}
