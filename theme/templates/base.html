@@ -4,6 +4,7 @@
 <head>
     <title>{% block title %}Popcorn Picks{% endblock %}</title>
     <meta name="viewport" content="width=device-width" />
+    <script src="https://kit.fontawesome.com/b7e64cc3fa.js" crossorigin="anonymous"></script>
 	{% tailwind_css %}
 </head>
 
@@ -14,10 +15,10 @@
             <!-- Left side navigation -->
             <ul class="flex lg:space-x-2">
                 <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
-                    <a href="/">Home</a>
+                    <a href="/"><i class="fa-solid fa-house-chimney"></i><p class="hidden sm:visible sm:inline ml-1">Home</p></a>
                 </li>
                 <li class="flex items-center ml-2 font-default overflow-x-hidden bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
-                    <a href="/film_ratings/movie_form/">Film Review</a>
+                    <a href="/film_ratings/movie_form/"><i class="fa-regular fa-star"></i><p class="hidden sm:visible sm:inline ml-1">Film Review</p></a>
                 </li>
             </ul>
 
@@ -37,7 +38,7 @@
             <ul class="flex lg:space-x-2">
                 {% if user.is_authenticated %}
                 <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
-                    <a href="{% url 'users:dashboard' %}">My Rated Films</a>
+                    <a href="{% url 'users:dashboard' %}"><i class="fa-regular fa-circle-user"></i><p class="hidden sm:visible sm:inline ml-1">My Rated Films</p></a>
                 </li>
                 <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
                     <form action="{% url 'users:logout_view' %}" method='post'>
@@ -47,10 +48,10 @@
                 </li>
                 {% else %}
                 <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
-                    <a href="{% url 'users:login_view' %}">Login</a>
+                    <a href="{% url 'users:login_view' %}"><i class="fa-solid fa-right-to-bracket"></i><p class="hidden sm:visible sm:inline ml-1">Login</p></a>
                 </li>
                 <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
-                    <a href="{% url 'users:register_view' %}">Register</a>
+                    <a href="{% url 'users:register_view' %}"><i class="fa-solid fa-user-plus"></i><p class="hidden sm:visible sm:inline ml-1">Register</p></a>
                 </li>
                 {% endif %}
             </ul>
