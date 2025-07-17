@@ -1,0 +1,37 @@
+@import url(https://fonts.googleapis.com/css?family=Figtree:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Cal+Sans:regular);
+@import url(https://fonts.googleapis.com/css?family=Ultra:regular);
+@import url(https://fonts.googleapis.com/css?family=Spectral:200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic);
+@import "tailwindcss";
+
+@theme {
+  --font-default: Cal Sans, sans-serif;
+  --font-alt: Comfortaa, sans-serif;
+  --font-serif: Spectral, serif;
+  --font-logo: Ultra, serif;
+  --dark-bg: #38040E;
+  --dark-2: #640D14;
+  --dark-3: #800E13;
+  --dark-4: #95232A;
+  --accent-dark: #250902;
+  --light-bg: #3bceac;
+  --light-2: #ffd23f;
+  --light-3: #ee4266;
+  --light-4: #0ead69;
+  --accent-light: #540d6e;
+  --light-text: #41102B;
+  --light-text-2: #612205;
+  --dark-text: #FBDADE;
+  --dark-text-2: #F0A8AB;
+  --text-error: red;
+}
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
