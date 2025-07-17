@@ -6,13 +6,13 @@
 
 {% if film_list %}
 <div class="flex justify-center">
-    <div class="grid grid-cols-2 w-full gap-3 md:grid-cols-5 md:w-[1000px] md:h-[100px] md:gap-6">
+    <div class="grid grid-cols-2 w-full gap-3 lg:grid-cols-5 lg:w-auto lg:h-auto lg:gap-6 lg:p-10">
         {% for movie in film_list|slice:':10' %}
-        <a class="text-[16px] md:h-[300px] text-[var(--light-text-2)] hover:text-[var(--light-text)] dark:text-[var(--dark-text-2)] dark:hover:text-[var(--dark-text)] hover:scale-105 duration-290" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
+        <a class="text-[16px] lg:h-[300px] xl:h-[500px] text-[var(--light-text-2)] hover:text-[var(--light-text)] dark:text-[var(--dark-text-2)] dark:hover:text-[var(--dark-text)] hover:scale-105 duration-290" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
             <div class="flex flex-col p-4">
                 <img
                     src="{{ movie.poster_url }}"
-                    class="h-auto w-auto object-cover md:h-[250px] md:w-auto rounded-md border-5 border-[var(--accent-light)] dark:border-[var(--accent-dark)]"
+                    class="w-full aspect-[2/3] object-cover rounded-md border-4 border-[var(--accent-light)] dark:border-[var(--accent-dark)]"
                     alt="Poster image for {{ movie.title }}"
                 />
                 <div class="font-default text-md">
