@@ -12,7 +12,7 @@ class TailwindAuthenticationForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] mt-3 mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[var(--dark-1)] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                'class': 'font-default bg-light-4 dark:bg-dark-4 mt-3 mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             })
 
 class TailwindRegistrationForm(UserCreationForm):
@@ -20,7 +20,7 @@ class TailwindRegistrationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] mt-3 mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[var(--dark-1)] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                'class': 'font-default bg-light-4 dark:bg-dark-4 mt-3 mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             })
 
 def register_view(request):
