@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="grid w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+    <div class="grid w-full place-items-center rounded-lg p-6">
       <img
         class="h-50 object-center rounded-lg"
         src="{% static 'pcpicksLOGO.png' %}"
         alt="PopCornPicks Logo"
       />
-      <div class="font-alt text-3xl text-[var(--light-text)] text-shadow-black dark:text-[var(--dark-text)] dark:text-shadow-black">
+      <div class="font-alt md:w-2xl text-center text-3xl text-[var(--light-text)] text-shadow-black dark:text-[var(--dark-text)] dark:text-shadow-black">
         On a scale of 1-10, how do you feel about the following aspects of this film?
       </div>
     </div>
     <div class="flex justify-center">
-        <form method="post" class="">
+        <form method="post" class="flex flex-col items-center justify-center w-full">
             {% csrf_token %}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-3xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-[90%] md:w-3xl">
                 <div class="md:col-span-2">
-                    <label for="{{ form.movie_title.id_for_label }}" class=" font-default block text-2xl text-center font-semibold text-[var(--light-text)] dark:text-[var(--dark-text-2)] mb-[10px]">
+                    <label for="{{ form.movie_title.id_for_label }}" class="font-default block text-2xl text-center font-semibold text-[var(--light-text)] dark:text-[var(--dark-text-2)] m-[10px]">
                         {{ form.movie_title.label }}
                     </label>
                     {{ form.movie_title }}
@@ -31,6 +31,19 @@
                             <label for="{{ field.id_for_label }}" class="flex justify-center font-default text-lg font-medium text-[var(--light-text)] dark:text-[var(--dark-text-2)]">
                                 {% if field.label == "Fun_to_watch" %}
                                     This film is fun to watch
+                                {% elif field.label == "Crying" %}
+                                    <label class="text-[var(--light-text-2)] dark:text-[var(--dark-text-2)] relative group">
+                                        Crying
+                                        <span class="ml-1 text-blue-300 cursor-pointer group relative">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        <span class="absolute font-default bottom-full mb-2 w-48 px-2 py-1 text-sm text-white bg-gray-800 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                                            <p>0-5 = Active cringe</p>
+                                            <p>5 = Neutral</p>
+                                            <p>5-7 = I cried the first time, but not every time</p>
+                                            <p>8-10 = I cry everytime</p>
+                                        </span>
+                                        </span>
+                                    </label>
                                 {% else %}
                                     {{ field.label }}
                                 {% endif %}
@@ -43,7 +56,7 @@
                     {% endif %}
                 {% endfor %}
                 </div>
-            <div class="flex justify-center mt-[50px]">
+            <div class="mt-[50px]">
                 <button type="submit" class="font-default text-xl w-[200px] text-[var(--light-text-2)] bg-[var(--light-3)]  hover:bg-[var(--light-2)] dark:text-[var(--dark-text-2)] dark:bg-[var(--dark-3)] dark:hover:bg-[var(--dark-2)] dark:hover:text-[var(--dark-text)] duration-250 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Submit</button>
             </div>
         </form>
