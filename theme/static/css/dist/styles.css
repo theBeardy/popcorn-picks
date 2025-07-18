@@ -652,6 +652,9 @@
   .pt-\[60px\] {
     padding-top: 60px;
   }
+  .pb-24 {
+    padding-bottom: calc(var(--spacing) * 24);
+  }
   .text-center {
     text-align: center;
   }
@@ -949,6 +952,11 @@
     }
   }
   @media (width >= 48rem) {
+    .md\:pb-0 {
+      padding-bottom: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 48rem) {
     .md\:text-2xl {
       font-size: var(--text-2xl);
       line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -984,6 +992,11 @@
   @media (width >= 64rem) {
     .lg\:left-0 {
       left: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:mt-0 {
+      margin-top: calc(var(--spacing) * 0);
     }
   }
   @media (width >= 64rem) {
