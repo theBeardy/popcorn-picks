@@ -52,4 +52,12 @@ class Review(models.Model):
     
     def save(self, *args, **kwargs):
         self.average = self.average_rating()
+        self.visuals = min(self.visuals, 10)
+        self.acting = min(self.acting, 10)
+        self.thought_provoking = min(self.thought_provoking, 10)
+        self.dialog = min(self.dialog, 10)
+        self.makes_me_cry = min(self.makes_me_cry, 10)
+        self.genre_execution = min(self.genre_execution, 10)
+        self.rewatchability = min(self.rewatchability, 10)
+        self.fun_to_watch = min(self.fun_to_watch, 10)
         super().save(*args, **kwargs)

@@ -12,7 +12,6 @@
   :root, :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-serif: Spectral, serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-green-300: oklch(87.1% 0.15 154.449);
@@ -27,7 +26,6 @@
     --container-xs: 20rem;
     --container-sm: 24rem;
     --container-md: 28rem;
-    --container-xl: 36rem;
     --container-2xl: 42rem;
     --container-3xl: 48rem;
     --text-sm: 0.875rem;
@@ -322,6 +320,12 @@
       max-width: 96rem;
     }
   }
+  .m-6 {
+    margin: calc(var(--spacing) * 6);
+  }
+  .m-12 {
+    margin: calc(var(--spacing) * 12);
+  }
   .m-16 {
     margin: calc(var(--spacing) * 16);
   }
@@ -360,9 +364,6 @@
   }
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
-  }
-  .mb-\[10px\] {
-    margin-bottom: 10px;
   }
   .ml-1 {
     margin-left: calc(var(--spacing) * 1);
@@ -433,12 +434,6 @@
   .h-screen {
     height: 100vh;
   }
-  .w-2xl {
-    width: var(--container-2xl);
-  }
-  .w-3xl {
-    width: var(--container-3xl);
-  }
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
@@ -457,17 +452,14 @@
   .w-\[200px\] {
     width: 200px;
   }
-  .w-auto {
-    width: auto;
+  .w-\[600px\] {
+    width: 600px;
   }
   .w-full {
     width: 100%;
   }
   .w-md {
     width: var(--container-md);
-  }
-  .w-xl {
-    width: var(--container-xl);
   }
   .max-w-2xl {
     max-width: var(--container-2xl);
@@ -543,9 +535,6 @@
   }
   .overflow-x-hidden {
     overflow-x: hidden;
-  }
-  .overflow-x-scroll {
-    overflow-x: scroll;
   }
   .rounded {
     border-radius: 0.25rem;
@@ -640,9 +629,6 @@
   }
   .font-logo {
     font-family: var(--font-logo);
-  }
-  .font-serif {
-    font-family: var(--font-serif);
   }
   .text-2xl {
     font-size: var(--text-2xl);
@@ -866,12 +852,6 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  @media (width >= 40rem) {
-    .sm\:text-xl {
-      font-size: var(--text-xl);
-      line-height: var(--tw-leading, var(--text-xl--line-height));
-    }
-  }
   @media (width >= 48rem) {
     .md\:col-span-2 {
       grid-column: span 2 / span 2;
@@ -1015,12 +995,6 @@
   @media (width >= 64rem) {
     .lg\:p-10 {
       padding: calc(var(--spacing) * 10);
-    }
-  }
-  @media (width >= 64rem) {
-    .lg\:text-3xl {
-      font-size: var(--text-3xl);
-      line-height: var(--tw-leading, var(--text-3xl--line-height));
     }
   }
   @media (width >= 64rem) {

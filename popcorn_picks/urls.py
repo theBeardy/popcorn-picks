@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from film_ratings import views as film_ratings_views
+from theme.views import change_theme
 
 urlpatterns = [
     path('', film_ratings_views.index, name="home"),
+    path('switch-theme/', change_theme, name="change-theme"),
     path('film_ratings/', include(("film_ratings.urls", "film_ratings"), namespace="film_ratings")),
     path('users/', include(('users.urls', 'users'), namespace='users')),
     path('admin/', admin.site.urls),

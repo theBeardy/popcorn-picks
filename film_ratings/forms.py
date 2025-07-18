@@ -11,6 +11,14 @@ class MovieForm(forms.ModelForm):
         model = Review
         exclude = ['movie_title', 'user', 'movie_title']
 
+    def clean(self):
+        cleaned_data = super().clean()
+        for field in ['visuals', 'acting', 'thought_provoking', 'dialog', 'makes_me_cry', 'genre_execution', 'rewatchability', 'fun_to_watch']:
+            value = cleaned_data.get(field)
+            if value and value > 10:
+                cleaned_data[field] = 10
+        return cleaned_data
+
     # Optionally: to hide default model field so no conflict
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
