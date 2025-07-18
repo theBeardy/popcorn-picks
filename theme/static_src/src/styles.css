@@ -1,4 +1,4 @@
-@config "./tailwind.config.js";
+@config "../../tailwind.config.js";
 @import url(https://fonts.googleapis.com/css?family=Figtree:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
 @import url(https://fonts.googleapis.com/css?family=Paytone+One:regular);
@@ -13,21 +13,25 @@
   --font-alt: Paytone One, sans-serif;
   --font-serif: Spectral, serif;
   --font-logo: Ultra, serif;
-  --dark-bg: #38040E;
-  --dark-2: #640D14;
-  --dark-3: #800E13;
-  --dark-4: #95232A;
-  --accent-dark: #250902;
-  --light-bg: #3bceac;
-  --light-2: #ffd23f;
-  --light-3: #ee4266;
-  --light-4: #0ead69;
-  --accent-light: #540d6e;
-  --light-text: #41102B;
-  --light-text-2: #612205;
-  --dark-text: #FBDADE;
-  --dark-text-2: #F0A8AB;
-  --text-error: red;
+  /** Color theme: BG is main color, and from 2-4 is 
+  gradually darker tones for both light and dark themes.
+  Light Theme accent is a dark color
+  Dark theme accent is a bright color **/
+  --color-dark-bg: #38040E;
+  --color-dark-2: #640D14;
+  --color-dark-3: #800E13;
+  --color-dark-4: #95232A;
+  --color-accent-dark: #E22030;
+  --color-light-bg: #F7CFD8;
+  --color-light-2: #DDF6D2;
+  --color-light-3: #A6D6D6;
+  --color-light-4: #8E7DBE;
+  --color-accent-light: #1d3557;
+  --color-light-text: #111E2D;
+  --color-light-text-2: #1D3449;
+  --color-dark-text: #FBDADE;
+  --color-dark-text-2: #F0A8AB;
+  --color-text-error: red;
 }
 
 /**
