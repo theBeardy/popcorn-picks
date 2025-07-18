@@ -15,14 +15,22 @@ class TailwindAuthenticationForm(AuthenticationForm):
                 'class': 'font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] mt-3 mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[var(--dark-1)] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             })
 
+class TailwindRegistrationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({
+                'class': 'font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] mt-3 mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[var(--dark-1)] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            })
+
 def register_view(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = TailwindRegistrationForm(request.POST)
         if form.is_valid():
             login(request, form.save())
             return redirect("film_ratings:index")
     else:
-        form = UserCreationForm()
+        form = TailwindRegistrationForm()
     return render(request, "users/register_view.html", { 'form' : form })
 
 def login_view(request):
