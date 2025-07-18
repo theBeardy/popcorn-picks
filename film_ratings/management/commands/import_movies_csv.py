@@ -40,7 +40,7 @@ class Command(BaseCommand):
                 )
 
                 Review.objects.create(
-                    user = User.objects.get(username='admin'),
+                    user = User.objects.get(username='thebeardy'),
                     movie_title=movie,
                     visuals=float(row['visuals'].strip()),
                     acting=float(row['acting'].strip()),
@@ -50,6 +50,5 @@ class Command(BaseCommand):
                     genre_execution=float(row['genre_execution'].strip()),
                     rewatchability=float(row['rewatch'].strip()),
                     fun_to_watch=float(row['fun_to_watch'].strip()),
-                    recommend=row['recommend'],
                 )
                 self.stdout.write(self.style.SUCCESS(f"Added '{title}' successfully."))
