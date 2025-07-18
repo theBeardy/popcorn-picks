@@ -1,3 +1,4 @@
+@config "./tailwind.config.js";
 @import url(https://fonts.googleapis.com/css?family=Figtree:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
 @import url(https://fonts.googleapis.com/css?family=Paytone+One:regular);
