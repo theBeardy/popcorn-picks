@@ -12,7 +12,7 @@ class TailwindAuthenticationForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'font-default bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                'class': 'font-default w-[90%] bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             })
 
 class TailwindRegistrationForm(UserCreationForm):
@@ -20,7 +20,7 @@ class TailwindRegistrationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'font-default bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                'class': 'font-default w-[90%] bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             })
 
 def register_view(request):
