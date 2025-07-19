@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <center>
+        {% if movie_search %}
+            <h1 class="m-16 text-4xl text-center font-alt leading-none tracking-tight text-light-text md:text-5xl lg:text-6xl dark:text-dark-text">Search results for "{{ movie_search }}"</h1>
+            <br>
+            {% for movie in movie_results %}
+                <a href="{% url 'film_ratings:film_details' movie.id %}">
+                    <img 
+                        src="{{ movie.poster_url }}" 
+                        alt="Poster for {{ movie.title }}"
+                    >
+                </a>
+                <h1 class="">{{ movie }} <em>({{ movie.release_year }})</em></h1>
+                <br>
+            {% endfor %}
+        {% else %}
+            <h1>You haven't searched for a thing...</h1>
+        {% endif %}
+    </center>
+{% endblock %}

@@ -9,6 +9,17 @@ def index(request):
     film_list = Movie.objects.annotate(average_rating=Avg('review__average')).order_by('-average_rating')
     return render(request, "film_ratings/index.html", {"film_list": film_list})
 
+def search_movies(request):
+    if request.method == "POST":
+        movie_search = request.POST['movie_search']
+        movie_results = Movie.objects.filter(title__contains=movie_search)
+        return render(request, 'film_ratings/search_movies.html', { 
+            'movie_search' : movie_search,
+            'movie_results' : movie_results,
+        })
+    else:
+        return render(request, 'film_ratings/search_movies.html', {})
+
 def film_details(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
 

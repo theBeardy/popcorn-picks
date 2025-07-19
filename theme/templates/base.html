@@ -42,6 +42,13 @@
                 </div>
             </div>
             
+            <div class="flex justify-center z-100">
+                <form class="" method=POST action="{% url 'film_ratings:search_movies' %}">
+                    {% csrf_token %}
+                    <input class="" type="search" placeholder="Search for a movie" name="movie_search">
+                    <button class="" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
 
             <!-- Right side authentication -->
             <ul class="flex lg:space-x-2">
