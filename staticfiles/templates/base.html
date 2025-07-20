@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="{% if is_dark_theme %}dark{% endif %}">
 {% load static tailwind_tags %}
 <head>
     <title>{% block title %}Popcorn Picks{% endblock %}</title>
@@ -8,49 +8,65 @@
 	{% tailwind_css %}
 </head>
 
-<body class="bg-fixed bg-[var(--light-bg)] text-[var(--light-text-2)] dark:text-[var(--dark-text-2)] dark:bg-[var(--dark-bg)] h-screen">
-    <nav id="navbar" class="fixed bottom-0 left-0 right-0 h-12 lg:top-0 lg:left-0 lg:right-0 z-50 lg:h-16 bg-[var(--light-2)] dark:bg-[var(--dark-2)] dark:text-[var(--dark-text)] w-full shadow">
+<body class="bg-fixed bg-light-bg text-light-text-2 dark:text-dark-text-2 dark:bg-dark-bg h-screen">
+    <nav id="navbar" class="fixed bottom-0 left-0 right-0 h-12 lg:mt-0 lg:top-0 lg:left-0 lg:right-0 z-50 lg:h-16 bg-light-2 dark:bg-dark-2 dark:text-dark-text w-full shadow-md drop-shadow-black">
         {% block sidebar %}
         <div class="flex justify-center lg:justify-between items-center h-full px-4">
             <!-- Left side navigation -->
             <ul class="flex lg:space-x-2">
-                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
+                    <a href="{% url 'change-theme' %}">
+                        {% if is_dark_theme %}
+                            <i class="fa-solid fa-sun"></i>
+                        {% else %}
+                            <i class="fa-solid fa-moon"></i>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
                     <a href="/"><i class="fa-solid fa-house-chimney"></i><p class="hidden sm:visible sm:inline ml-1">Home</p></a>
                 </li>
-                <li class="flex items-center ml-2 font-default overflow-x-hidden bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default overflow-x-hidden bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
                     <a href="/film_ratings/movie_form/"><i class="fa-regular fa-star"></i><p class="hidden sm:visible sm:inline ml-1">Film Review</p></a>
                 </li>
             </ul>
 
             <div class="flex justify-center">
-                <div class="fixed lg:static top-0 left-0 right-0 flex justify-center h-14 w-full items-center bg-[var(--light-2)] dark:bg-[var(--dark-2)] lg:flex lg:justify-center lg:space-x-2 lg:w-[450px]">
+                <div class="fixed lg:static top-0 left-0 right-0 flex justify-center h-14 w-full items-center bg-light-2 dark:bg-dark-2 lg:flex lg:justify-center lg:space-x-2 lg:w-[450px] shadow-md drop-shadow-black lg:shadow-none">
                     <img 
                         src="{% static 'pcpicksLOGO.png' %}" 
                         alt="PopCornPicks Logo"
                         class="h-[60px] text-shadow-sm"
                     >
-                    <h1 class="font-logo text-shadow-black text-shadow-sm text-4xl text-black dark:outline-black dark:text-white">Popcorn Picks</h1>
+                    <h1 class="font-logo text-shadow-black text-shadow-sm text-2xl sm:text-4xl text-light-4 dark:text-dark-4">Popcorn Picks</h1>
                 </div>
             </div>
             
+            <div class="flex justify-center z-100">
+                <form class="" method=POST action="{% url 'film_ratings:search_movies' %}">
+                    {% csrf_token %}
+                    <input class="" type="search" placeholder="Search for a movie" name="movie_search">
+                    <button class="" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
 
             <!-- Right side authentication -->
             <ul class="flex lg:space-x-2">
                 {% if user.is_authenticated %}
-                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
                     <a href="{% url 'users:dashboard' %}"><i class="fa-regular fa-circle-user"></i><p class="hidden sm:visible sm:inline ml-1">My Rated Films</p></a>
                 </li>
-                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
                     <form action="{% url 'users:logout_view' %}" method='post'>
                         {% csrf_token %}
                         <button title="User Logout"><i class="fa-solid fa-right-from-bracket"></i><p class="hidden sm:visible sm:inline ml-1">Logout</p></button>
                     </form>
                 </li>
                 {% else %}
-                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
                     <a href="{% url 'users:login_view' %}"><i class="fa-solid fa-right-to-bracket"></i><p class="hidden sm:visible sm:inline ml-1">Login</p></a>
                 </li>
-                <li class="flex items-center ml-2 font-default bg-[var(--light-4)] dark:bg-[var(--dark-4)] text-[var(--light-text)] dark:text-[var(--dark-text)] px-4 py-1 hover:bg-[var(--light-1)] dark:hover:bg-[var(--dark-3)] hover:text-[var(--light-text)] dark:hover:text-[var(--dark-text)] h-full rounded-md shadow-sm">
+                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
                     <a href="{% url 'users:register_view' %}"><i class="fa-solid fa-user-plus"></i><p class="hidden sm:visible sm:inline ml-1">Register</p></a>
                 </li>
                 {% endif %}
@@ -61,5 +77,6 @@
     <div id="content" class="pt-[60px]">
         {% block content %}{% endblock %}
     </div>
+    <div class="h-28"></div>
 </body>
 </html>
