@@ -1,20 +1,78 @@
 {% extends "base.html" %}
 {% load static %}
+{% load filters %}
 {% block content %}
     <center>
         {% if movie_search %}
-            <h1 class="m-16 text-4xl text-center font-alt leading-none tracking-tight text-light-text md:text-5xl lg:text-6xl dark:text-dark-text">Search results for "{{ movie_search }}"</h1>
+            <h1 class="mt-5 lg:m-16 text-3xl text-center font-alt text-light-text md:text-5xl lg:text-6xl dark:text-dark-text">Search results for "{{ movie_search }}"</h1>
             <br>
-            {% for movie in movie_results %}
-                <a href="{% url 'film_ratings:film_details' movie.id %}">
-                    <img 
-                        src="{{ movie.poster_url }}" 
-                        alt="Poster for {{ movie.title }}"
-                    >
-                </a>
-                <h1 class="">{{ movie }} <em>({{ movie.release_year }})</em></h1>
-                <br>
-            {% endfor %}
+            {% comment %} Large View Table {% endcomment %}
+            <div class="hidden lg:block relative overflow-x-auto">
+                <table class="w-[75%] text-sm text-left rtl:text-right text-light-text dark:text-dark-text border-1 border-light-4 dark:border-dark-4">
+                    <thead class="text-xs text-light-text uppercase bg-light-4 dark:bg-dark-4 dark:text-dark-text">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Thumbnail
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Movie Title
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Release Year
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Overall Rating (0-10)
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Total Num. of Reviews
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Your Rating (0-10)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for movie in movie_results  %}
+                            <tr class="text-sm">
+                                <td class="font-default bg-light-2 dark:bg-dark-2 border-1 border-light-4 dark:border-dark-4 text-light-text-2 dark:text-dark-text-2 px-6 py-3"><center><a href="{% url 'film_ratings:film_details' movie.id %}"><img class="h-[100px] aspect-[2/3] shadow-md shadow-black" src="{{ movie.poster_url }}" alt="Thumbnail for {{ movie.title }}"></a></center></td>
+                                <td class="font-default bg-light-2 dark:bg-dark-2 border-1 border-light-4 dark:border-dark-4 text-light-text-2 dark:text-dark-text-2 px-6 py-3">{{ movie.title }}</td>
+                                <td class="font-default bg-light-2 dark:bg-dark-2 border-1 border-light-4 dark:border-dark-4 text-light-text-2 dark:text-dark-text-2 px-6 py-3">{{ movie.release_year }}</td>
+                                <td class="font-default bg-light-2 dark:bg-dark-2 border-1 border-light-4 dark:border-dark-4 text-light-text-2 dark:text-dark-text-2 px-6 py-3">{{ movie.average_rating|floatformat:1 }}</td>
+                                <td class="font-default bg-light-2 dark:bg-dark-2 border-1 border-light-4 dark:border-dark-4 text-light-text-2 dark:text-dark-text-2 px-6 py-3">No. of Reviews</td>
+                                <td class="font-default bg-light-2 dark:bg-dark-2 border-1 border-light-4 dark:border-dark-4 text-light-text-2 dark:text-dark-text-2 px-6 py-3">
+                                    {% if user_reviews|get_item:movie.id %}
+                                        {{ user_reviews|get_item:movie.id|floatformat:1 }}
+                                    {% else %}
+                                        <em><a href="{% url 'film_ratings:movie_form' %}"><i class="fa-regular fa-star"></i>Leave a review for this film</a></em>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% comment %} View for < Large view {% endcomment %}
+            <div class="lg:hidden">
+                {% for movie in movie_results %}
+                    <div class="w-[90%] bg-light-3 dark:bg-dark-3 rounded-md shadow-md shadow-black m-5">
+                        <a href="{% url 'film_ratings:film_details' movie.id %}">
+                            <img class="w-full aspect-[2/3] object-cover rounded-t-md" src="{{ movie.poster_url }}" alt="Poster for {{ movie.title }}">
+                        </a>
+                        <div class="p-4">  <!-- Shared padding container for consistent spacing -->
+                            <h1 class="text-left text-xl font-alt text-light-text-2 dark:text-dark-text-2">{{ movie.title }} ({{ movie.release_year }})</h1>
+                            <p class="text-left font-default text-light-text dark:text-dark-text">Overall Rating (1-10): {{ movie.average_rating|floatformat:1 }}</p>
+                            <p class="text-left font-default text-light-text dark:text-dark-text">No. of Reviews</p>
+                            <p class="text-left font-default text-light-text dark:text-dark-text">
+                                {% if user_reviews|get_item:movie.id %}
+                                    Your Rating: {{ user_reviews|get_item:movie.id|floatformat:1 }}
+                                {% else %}
+                                    <em><a href="{% url 'film_ratings:movie_form' %}"><i class="fa-regular fa-star"></i>Leave a review for this film</a></em>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
             <h1>You haven't searched for a thing...</h1>
         {% endif %}

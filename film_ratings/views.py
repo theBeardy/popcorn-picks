@@ -12,10 +12,20 @@ def index(request):
 def search_movies(request):
     if request.method == "POST":
         movie_search = request.POST['movie_search']
-        movie_results = Movie.objects.filter(title__contains=movie_search)
+        movie_results = Movie.objects.filter(title__icontains=movie_search) \
+            .annotate(average_rating=Avg('review__average'))
+        
+        user_reviews = {}
+        if request.user.is_authenticated:
+            user_review_qs = Review.objects.filter(
+                movie_title__in=movie_results, user=request.user
+            )
+            user_reviews = {review.movie_title.id: review.average for review in user_review_qs}
+
         return render(request, 'film_ratings/search_movies.html', { 
             'movie_search' : movie_search,
             'movie_results' : movie_results,
+            'user_reviews' : user_reviews,
         })
     else:
         return render(request, 'film_ratings/search_movies.html', {})

@@ -43,10 +43,10 @@
             </div>
             
             <div class="flex justify-center z-100">
-                <form class="" method=POST action="{% url 'film_ratings:search_movies' %}">
+                <form class="flex items-center h-auto" method=POST action="{% url 'film_ratings:search_movies' %}">
                     {% csrf_token %}
-                    <input class="" type="search" placeholder="Search for a movie" name="movie_search">
-                    <button class="" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input class="font-default text-center w-auto bg-light-3 dark:bg-dark-3 rounded-md p-3 mr-2" type="search" placeholder="Search for a movie" name="movie_search">
+                    <button class="text-xl h-[80%] w-[40px] bg-light-4 text-light-text dark:bg-dark-4 dark:text-dark-text rounded-md" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </div>
 
