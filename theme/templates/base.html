@@ -77,8 +77,8 @@
         {% endblock %}
     </nav>
     <div id="content" class="pt-[60px]">
-        <div class="fixed z-55 top-0 right-0 px-5 mt-20">
-            <div class="mx-auto max-w-md">
+        <div class="fixed z-55 top-0 right-0 py-2 px-5 mt-20">
+            <div class="mx-auto max-w-md scale-125 lg:scale-100">
                 <form method="POST" action="{% url 'film_ratings:search_movies' %}" class="relative mx-auto w-max bg-light-2 dark:bg-dark-2 rounded-3xl">
                     {% csrf_token %}
                     <input type="search" class="peer relative z-10 h-12 w-12 cursor-pointer rounded-full border-light-4 dark:border-dark-4 bg-transparent pl-12 outline-none focus:w-full focus:cursor-text focus:border-accent-light dark:focus:border-accent-dark focus:pl-16 focus:pr-4" name="movie_search"/>
