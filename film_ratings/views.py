@@ -1,6 +1,8 @@
 import requests
 from django.conf import settings
 from django.db.models import Avg
+from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Movie, Review
@@ -12,6 +14,47 @@ def index(request):
     return render(request, "film_ratings/index.html", {"film_list": film_list})
 
 TMDB_API_KEY = settings.TMDB_API_KEY  # store this in your .env or settings.py
+
+def search_autocomplete(request):
+    query = request.GET.get('movie_search', '')
+    results = []
+
+    if query:
+        # Search local DB
+        local_matches = Movie.objects.filter(title__icontains=query)[:5]
+        for m in local_matches:
+            results.append({
+                'source': 'local',
+                'id': m.id,
+                'title': m.title,
+                'year': m.release_year,
+                'poster_url': m.poster_url
+            })
+
+        # Also search TMDb
+        url = 'https://api.themoviedb.org/3/search/movie'
+        params = {
+            'api_key': TMDB_API_KEY,
+            'query': query,
+            'include_adult': 'false',
+            'language': 'en-US',
+        }
+        try:
+            response = requests.get(url, params=params, timeout=3)
+            if response.status_code == 200:
+                data = response.json()
+                for item in data.get('results', [])[:5]:
+                    results.append({
+                        'source': 'tmdb',
+                        'id': item['id'],
+                        'title': item['title'],
+                        'year': item.get('release_date', '')[:4],
+                        'poster_url': f"https://image.tmdb.org/t/p/w200{item['poster_path']}" if item.get('poster_path') else None
+                    })
+        except requests.RequestException:
+            pass  # Handle TMDb failure silently or log it
+
+    return render(request, 'partials/search_autocomplete.html', {'results': results})
 
 def select_movie(request):
     source = request.GET.get('source')
@@ -57,6 +100,11 @@ def select_movie(request):
                 updated = True
             if updated:
                 movie.save()
+        
+        redirect_url = reverse('film_ratings:film_details', args=[movie.id])
+        response = HttpResponse()
+        response['HX-Redirect'] = redirect_url
+        return response
 
     return render(request, 'partials/selected_movie_card.html', {'movie': movie})
 

@@ -7,5 +7,6 @@ urlpatterns = [
     path("movie_form/", views.new_film_form, name="movie_form"),
     path("search_movies/", views.search_movies, name="search_movies"),
     path("autocomplete_movies/", views.autocomplete_movies, name="autocomplete_movies"),
+    path("search_autocomplete/", views.search_autocomplete, name="search_autocomplete"),
     path("select_movie/", views.select_movie, name="select_movie")
 ]
