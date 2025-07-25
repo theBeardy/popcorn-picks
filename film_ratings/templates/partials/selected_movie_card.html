@@ -1,0 +1,35 @@
+<div id="movie-selected" class="flex flex-col justify-center items-center my-4 p-4">
+  {% if movie.poster_url %}
+    <img 
+      src="{{ movie.poster_url }}" 
+      alt="Poster for {{ movie.title }}" 
+      class="w-32 mb-2 rounded cursor-pointer hover:opacity-80 transition"
+      onclick="confirmChangeMovie()" 
+    />
+  {% endif %}
+  <h3 class="text-xl font-semibold mb-2">{{ movie.title }} ({{ movie.release_year }})</h3>
+  <script>
+    function confirmChangeMovie() {
+      const confirmChange = confirm("Do you want to change the selected movie?");
+      if (confirmChange) {
+        resetMovieSelection();
+      }
+    }
+
+    function resetMovieSelection() {
+      const selection = document.getElementById('movie-selected');
+      const input = document.getElementById('movie-title-input');
+      selection.innerHTML = '';
+      selection.classList.add('hidden');
+      input.value = '';
+      input.classList.remove('hidden');
+      input.focus();
+    }
+  </script>
+
+  <!-- Hidden fields to submit with form -->
+  <input type="hidden" name="movie_id" value="{{ movie.id }}">
+  <input type="hidden" name="movie_title" value="{{ movie.title }}">
+  <input type="hidden" name="release_year" value="{{ movie.release_year }}">
+  <input type="hidden" name="description" value="{{ movie.description }}">
+</div>

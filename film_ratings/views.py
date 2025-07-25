@@ -13,25 +13,79 @@ def index(request):
 
 TMDB_API_KEY = settings.TMDB_API_KEY  # store this in your .env or settings.py
 
+def select_movie(request):
+    source = request.GET.get('source')
+    movie_id = request.GET.get('id')
+
+    movie = None
+
+    if source == 'local':
+        movie = get_object_or_404(Movie, id=movie_id)
+    elif source == 'tmdb':
+        url = f'https://api.themoviedb.org/3/movie/{movie_id}'
+        params = {
+            'api_key': TMDB_API_KEY,
+            'language': 'en-US',
+        }
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            data = response.json()
+            release_year = data.get('release_date', '')[:4]
+            poster_url = f"https://image.tmdb.org/t/p/w200{data.get('poster_path')}" if data.get('poster_path') else None
+            description = data.get('overview', '')
+
+            movie, created = Movie.objects.get_or_create(
+                title=data['title'],
+                release_year=release_year,
+                defaults={
+                    'poster_url': poster_url,
+                    'description': description,
+                    'tmdb_id': data['id'],
+                }
+            )
+
+            # If movie existed but missing fields, update them
+            updated = False
+            if not movie.poster_url and poster_url:
+                movie.poster_url = poster_url
+                updated = True
+            if not movie.description and description:
+                movie.description = description
+                updated = True
+            if not movie.tmdb_id:
+                movie.tmdb_id = data['id']
+                updated = True
+            if updated:
+                movie.save()
+
+    return render(request, 'partials/selected_movie_card.html', {'movie': movie})
+
 def autocomplete_movies(request):
-    query = request.GET.get('q', '')
+    query = request.GET.get('movie_title', '')
     results = []
 
     if query:
-        # First: Check local database
+        # Search local DB
         local_matches = Movie.objects.filter(title__icontains=query)[:5]
-        results = [{'source': 'local', 'id': m.id, 'title': m.title, 'year': m.release_year} for m in local_matches]
+        for m in local_matches:
+            results.append({
+                'source': 'local',
+                'id': m.id,
+                'title': m.title,
+                'year': m.release_year,
+                'poster_url': m.poster_url
+            })
 
-        # If no results locally, search TMDb
-        if not results:
-            url = 'https://api.themoviedb.org/3/search/movie'
-            params = {
-                'api_key': TMDB_API_KEY,
-                'query': query,
-                'include_adult': 'false',
-                'language': 'en-US',
-            }
-            response = requests.get(url, params=params)
+        # Also search TMDb
+        url = 'https://api.themoviedb.org/3/search/movie'
+        params = {
+            'api_key': TMDB_API_KEY,
+            'query': query,
+            'include_adult': 'false',
+            'language': 'en-US',
+        }
+        try:
+            response = requests.get(url, params=params, timeout=3)
             if response.status_code == 200:
                 data = response.json()
                 for item in data.get('results', [])[:5]:
@@ -40,7 +94,10 @@ def autocomplete_movies(request):
                         'id': item['id'],
                         'title': item['title'],
                         'year': item.get('release_date', '')[:4],
+                        'poster_url': f"https://image.tmdb.org/t/p/w200{item['poster_path']}" if item.get('poster_path') else None
                     })
+        except requests.RequestException:
+            pass  # Handle TMDb failure silently or log it
 
     return render(request, 'partials/movie_suggestions.html', {'results': results})
 

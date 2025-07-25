@@ -16,7 +16,7 @@
             {% csrf_token %}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-[90%] md:w-3xl">
                 <div class="md:col-span-2">
-                    <label for="{{ form.movie_title.id_for_label }}" class="font-default block text-2xl text-center font-semibold text-light-text dark:text-dark-text-2 m-[10px]">
+                    <label id="movie-name" for="{{ form.movie_title.id_for_label }}" class="font-default block text-2xl text-center font-semibold text-light-text dark:text-dark-text-2 m-[10px]">
                         {{ form.movie_title.label }}
                     </label>
                     <input 
@@ -30,7 +30,9 @@
                         autocomplete="off"
                         class="font-default text-center bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
-
+                    <div id="movie-selected">
+                        <!-- This will be replaced with movie info (from select_movie view) -->
+                    </div>
                     <div id="movie-suggestions" class="autocomplete-results">
                         <!-- Suggestions will render here -->
                     </div>
@@ -73,5 +75,25 @@
                 <button type="submit" class="font-default text-xl w-[200px] text-light-text-2 bg-light-3  hover:bg-light-2 dark:text-dark-text-2 dark:bg-dark-3 dark:hover:bg-dark-2 dark:hover:text-dark-text duration-250 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Submit</button>
             </div>
         </form>
+        <script>
+            const input = document.getElementById('movie-title-input');
+            const suggestionsBox = document.getElementById('movie-suggestions');
+            const movieSelectedBox = document.getElementById('movie-selected');
+
+            // When user selects a movie (HTMX triggers a swap), clear suggestions
+            document.body.addEventListener('htmx:afterSwap', (event) => {
+                if (event.detail.target.id === 'movie-selected') {
+                suggestionsBox.innerHTML = '';         // Hide suggestions
+                input.value = '';                      // Clear the input
+                input.classList.add('hidden');         // Optionally hide input
+                }
+            });
+
+            // When user types again, show input and clear selected movie
+            input.addEventListener('input', () => {
+                movieSelectedBox.innerHTML = '';         // Remove selected movie card
+                input.classList.remove('hidden');        // Ensure input is visible
+            });
+        </script>
     </div>
 {% endblock %}
