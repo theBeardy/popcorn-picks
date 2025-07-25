@@ -1,30 +1,37 @@
+@config "../../tailwind.config.js";
 @import url(https://fonts.googleapis.com/css?family=Figtree:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Paytone+One:regular);
 @import url(https://fonts.googleapis.com/css?family=Cal+Sans:regular);
 @import url(https://fonts.googleapis.com/css?family=Ultra:regular);
+@import url(https://fonts.googleapis.com/css?family=Tilt+Warp:regular);
 @import url(https://fonts.googleapis.com/css?family=Spectral:200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic);
 @import "tailwindcss";
 
 @theme {
   --font-default: Cal Sans, sans-serif;
-  --font-alt: Comfortaa, sans-serif;
+  --font-alt: Paytone One, sans-serif;
   --font-serif: Spectral, serif;
   --font-logo: Ultra, serif;
-  --dark-bg: #38040E;
-  --dark-2: #640D14;
-  --dark-3: #800E13;
-  --dark-4: #95232A;
-  --accent-dark: #250902;
-  --light-bg: #3bceac;
-  --light-2: #ffd23f;
-  --light-3: #ee4266;
-  --light-4: #0ead69;
-  --accent-light: #540d6e;
-  --light-text: #41102B;
-  --light-text-2: #612205;
-  --dark-text: #FBDADE;
-  --dark-text-2: #F0A8AB;
-  --text-error: red;
+  /** Color theme: BG is main color, and from 2-4 is 
+  gradually darker tones for both light and dark themes.
+  Light Theme accent is a dark color
+  Dark theme accent is a bright color **/
+  --color-dark-bg: #38040E;
+  --color-dark-2: #640D14;
+  --color-dark-3: #800E13;
+  --color-dark-4: #95232A;
+  --color-accent-dark: #E22030;
+  --color-light-bg: #F6F7F4;         /* soft, light gray with a hint of green */
+  --color-light-2: #E1E5E1;          /* subtle sage-gray for surfaces/cards */
+  --color-light-3: #CBD3CF;          /* muted eucalyptus tone for hover or emphasis */
+  --color-light-4: #A8B4AC;          /* soft green-gray for borders or tertiary accents */
+  --color-accent-light: #5E8370;     /* cool, desaturated green for buttons/links */
+  --color-light-text: #1F2A23;       /* deep charcoal with green undertone */
+  --color-light-text-2: #3F4F45;     /* medium gray-green for subtext or muted headings */  
+  --color-dark-text: #FBDADE;
+  --color-dark-text-2: #F0A8AB;
+  --color-text-error: red;
 }
 
 /**
