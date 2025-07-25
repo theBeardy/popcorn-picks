@@ -1,0 +1,16 @@
+<ul class="bg-white border rounded shadow max-h-60 overflow-y-auto">
+    {% for result in results %}
+        <li 
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex justify-between text-sm"
+            hx-post="{% url 'film_ratings:film_details' movie.id %}" 
+            hx-vals='{"title": "{{ result.title|escapejs }}", "year": "{{ result.year }}", "source": "{{ result.source }}", "id": "{{ result.id }}"}'
+            hx-target="#movie-title-input"
+            hx-swap="outerHTML"
+        >
+            <span>{{ result.title }} {% if result.year %}({{ result.year }}){% endif %}</span>
+            <span class="text-gray-500 italic">{{ result.source|upper }}</span>
+        </li>
+    {% empty %}
+        <li class="px-4 py-2 text-gray-500">No matches found</li>
+    {% endfor %}
+</ul>

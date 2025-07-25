@@ -1,3 +1,5 @@
+import requests
+from django.conf import settings
 from django.db.models import Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -8,6 +10,39 @@ from .utils import fetch_movie_data
 def index(request):
     film_list = Movie.objects.annotate(average_rating=Avg('review__average')).order_by('-average_rating')
     return render(request, "film_ratings/index.html", {"film_list": film_list})
+
+TMDB_API_KEY = settings.TMDB_API_KEY  # store this in your .env or settings.py
+
+def autocomplete_movies(request):
+    query = request.GET.get('q', '')
+    results = []
+
+    if query:
+        # First: Check local database
+        local_matches = Movie.objects.filter(title__icontains=query)[:5]
+        results = [{'source': 'local', 'id': m.id, 'title': m.title, 'year': m.release_year} for m in local_matches]
+
+        # If no results locally, search TMDb
+        if not results:
+            url = 'https://api.themoviedb.org/3/search/movie'
+            params = {
+                'api_key': TMDB_API_KEY,
+                'query': query,
+                'include_adult': 'false',
+                'language': 'en-US',
+            }
+            response = requests.get(url, params=params)
+            if response.status_code == 200:
+                data = response.json()
+                for item in data.get('results', [])[:5]:
+                    results.append({
+                        'source': 'tmdb',
+                        'id': item['id'],
+                        'title': item['title'],
+                        'year': item.get('release_date', '')[:4],
+                    })
+
+    return render(request, 'partials/movie_suggestions.html', {'results': results})
 
 def search_movies(request):
     if request.method == "POST":

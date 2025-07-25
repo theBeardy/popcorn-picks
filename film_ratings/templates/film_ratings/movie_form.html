@@ -19,12 +19,25 @@
                     <label for="{{ form.movie_title.id_for_label }}" class="font-default block text-2xl text-center font-semibold text-light-text dark:text-dark-text-2 m-[10px]">
                         {{ form.movie_title.label }}
                     </label>
-                    {{ form.movie_title }}
+                    <input 
+                        type="text" 
+                        name="movie_title" 
+                        id="movie-title-input"
+                        hx-get="{% url 'film_ratings:autocomplete_movies' %}"
+                        hx-trigger="keyup changed delay:300ms"
+                        hx-target="#movie-suggestions"
+                        hx-swap="innerHTML"
+                        autocomplete="off"
+                        class="font-default text-center bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+
+                    <div id="movie-suggestions" class="autocomplete-results">
+                        <!-- Suggestions will render here -->
+                    </div>
                     {% if form.movie_title.errors %}
                         <p class="text-text-error text-sm mt-1">{{ form.movie_title.errors }}</p>
                     {% endif %}
                 </div>
-
                 {% for field in form %}
                     {% if field.name != 'movie_title' and field.name != 'average' and field.name != 'recommend' %}
                         <div>
