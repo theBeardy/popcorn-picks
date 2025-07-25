@@ -103,5 +103,20 @@
     </div>
     <div class="h-28"></div>
     <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.querySelector('input[name="movie_search"]');
+            const suggestions = document.getElementById("search_autocomplete");
+
+            if (searchInput && suggestions) {
+                searchInput.addEventListener("blur", function () {
+                    // Delay hiding suggestions so clicks can register
+                    setTimeout(() => {
+                        suggestions.innerHTML = "";
+                    }, 200);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

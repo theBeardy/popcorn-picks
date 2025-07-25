@@ -56,7 +56,7 @@ def search_autocomplete(request):
 
     return render(request, 'partials/search_autocomplete.html', {'results': results})
 
-def select_movie(request):
+def search_select_movie(request):
     source = request.GET.get('source')
     movie_id = request.GET.get('id')
 
@@ -101,10 +101,55 @@ def select_movie(request):
             if updated:
                 movie.save()
         
-        redirect_url = reverse('film_ratings:film_details', args=[movie.id])
-        response = HttpResponse()
-        response['HX-Redirect'] = redirect_url
-        return response
+    redirect_url = reverse('film_ratings:film_details', args=[movie.id])
+    response = HttpResponse()
+    response['HX-Redirect'] = redirect_url
+    return response
+
+def select_movie(request):
+    source = request.GET.get('source')
+    movie_id = request.GET.get('id')
+
+    movie = None
+
+    if source == 'local':
+        movie = get_object_or_404(Movie, id=movie_id)
+    elif source == 'tmdb':
+        url = f'https://api.themoviedb.org/3/movie/{movie_id}'
+        params = {
+            'api_key': TMDB_API_KEY,
+            'language': 'en-US',
+        }
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            data = response.json()
+            release_year = data.get('release_date', '')[:4]
+            poster_url = f"https://image.tmdb.org/t/p/w200{data.get('poster_path')}" if data.get('poster_path') else None
+            description = data.get('overview', '')
+
+            movie, created = Movie.objects.get_or_create(
+                title=data['title'],
+                release_year=release_year,
+                defaults={
+                    'poster_url': poster_url,
+                    'description': description,
+                    'tmdb_id': data['id'],
+                }
+            )
+
+            # If movie existed but missing fields, update them
+            updated = False
+            if not movie.poster_url and poster_url:
+                movie.poster_url = poster_url
+                updated = True
+            if not movie.description and description:
+                movie.description = description
+                updated = True
+            if not movie.tmdb_id:
+                movie.tmdb_id = data['id']
+                updated = True
+            if updated:
+                movie.save()
 
     return render(request, 'partials/selected_movie_card.html', {'movie': movie})
 
