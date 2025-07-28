@@ -1339,6 +1339,14 @@
       --tw-shadow-color: color-mix(in oklab, var(--color-dark-4) var(--tw-shadow-alpha), transparent);
     }
   }
+  .dark\:text-shadow-accent-dark:is(.dark *) {
+    --tw-text-shadow-color: #E22030;
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .dark\:text-shadow-accent-dark:is(.dark *) {
+      --tw-text-shadow-color: color-mix(in oklab, var(--color-accent-dark) var(--tw-text-shadow-alpha), transparent);
+    }
+  }
   .dark\:text-shadow-black:is(.dark *) {
     --tw-text-shadow-color: #000;
   }

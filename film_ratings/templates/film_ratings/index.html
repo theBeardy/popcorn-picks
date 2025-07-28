@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1 class="m-16 text-4xl text-center font-alt leading-none tracking-tight text-light-text md:text-5xl lg:text-6xl dark:text-dark-text text-shadow-md text-shadow-accent-light dark:text-accent-dark">Top 10 Films by Average Rating</h1>
+<h1 class="m-16 text-4xl text-center font-alt leading-none tracking-tight text-light-text md:text-5xl lg:text-6xl dark:text-dark-text text-shadow-md text-shadow-accent-light dark:text-shadow-accent-dark">Top 10 Films by Average Rating</h1>
 
 {% if film_list %}
 <div class="flex justify-center">
@@ -12,7 +12,7 @@
             <div class="flex flex-col p-4">
                 <img
                     src="{{ movie.poster_url }}"
-                    class="w-full sm:max-h-[1000px] max-h-[500px] [aspect-[2/3] object-cover rounded-md border-4 border-accent-light dark:border-accent-dark shadow-md shadow-light-4 dark:shadow-dark-4"
+                    class="w-full sm:max-h-[1000px] max-h-[500px] [aspect-[2/3] object-cover rounded-md shadow-md shadow-black"
                     alt="Poster image for {{ movie.title }}"
                 />
                 <div class="font-default text-md">
