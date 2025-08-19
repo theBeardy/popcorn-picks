@@ -4,6 +4,7 @@
 <head>
     <title>{% block title %}Popcorn Picks{% endblock %}</title>
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
     <script src="https://kit.fontawesome.com/b7e64cc3fa.js" crossorigin="anonymous"></script>
 	{% tailwind_css %}
 </head>
@@ -38,7 +39,7 @@
                         alt="PopCornPicks Logo"
                         class="h-[60px] text-shadow-sm"
                     >
-                    <h1 class="font-logo text-shadow-black text-shadow-sm text-2xl sm:text-4xl text-light-4 dark:text-dark-4">Popcorn Picks</h1>
+                    <h1 class="font-logo text-shadow-black text-shadow-sm text-2xl sm:text-4xl text-light-4 dark:text-dark-4"><a href="{% url 'film_ratings:index' %}">Popcorn Picks</a></h1>
                 </div>
             </div>
             
