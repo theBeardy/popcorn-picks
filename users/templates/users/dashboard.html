@@ -5,24 +5,81 @@
   <div class="flex justify-center p-8">
     
     {% if user_review_data %}
-    <div class="flex justify-center">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {% for film in user_review_data %}
-          <div class="bg-light-bg dark:bg-dark-bg rounded-lg p-4">
-            <a href="{% url 'film_ratings:film_details' film.movie_title.id %}">
-              <img 
-                src="{{ film.movie_title.poster_url }}" 
-                alt="Poster for {{ film.movie_title.title }}"
-                class="w-60 h-auto rounded shadow-black shadow-sm lg:shadow-md"
-              />
-            </a><h2 class="font-default text-xl font-semibold text-light-text dark:text-dark-text mt-2">{{ film.movie_title.title }}
-              {% if film.movie_title.release_year %}
-              <p class="inline text-sm text-light-text-2 dark:text-dark-text-2 mb-2">({{ film.movie_title.release_year }})</p>
-              {% endif %}
-            </h2>
-            <p class="text-light-text dark:text-dark-text">Avg Rating: {{ film.average_score|floatformat:1 }}</p>
-          </div>
-        {% endfor %}
+      <div class="flex justify-center m-4 overflow-hidden">
+        <div class="w-[100%] h-[80vh] relative overflow-y-scroll shadow-md rounded-lg overflow-hidden">
+          <table class="w-full text-sm text-left text-light-text dark:text-dark-text scrollbar-hide">
+              <thead class="sticky top-0 z-10 text-xs text-light-text-2 uppercase bg-light-3 dark:bg-dark-3 dark:text-dark-text-2">
+                  <tr>
+                      <th scope="col" class="px-6 py-3">
+                          <div class="flex items-center">
+                            <a href="#" class="flex items-center">Overall Rank
+                              <i class="mx-2 fa-solid fa-sort"></i>
+                            </a>
+                          </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          <div class="flex items-center">
+                            <a href="#" class="flex items-center">Film Title
+                              <i class="mx-2 fa-solid fa-sort"></i>
+                            </a>
+                          </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          <div class="flex items-center">
+                            <a href="#" class="flex items-center">Release Year
+                              <i class="mx-2 fa-solid fa-sort"></i>
+                            </a>
+                          </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          <div class="flex items-center">
+                            <a href="#" class="flex items-center">Your Rating
+                              <i class="mx-2 fa-solid fa-sort"></i>
+                            </a>
+                          </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          <span class="sr-only">Edit</span>
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for film in user_review_data %}    
+                  <tr class="bg-light-2 border-b dark:bg-dark-2 dark:border-accent-dark border-accent-light">
+                    <th>
+                      
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-medium text-light-text whitespace-nowrap dark:text-dark-text">
+                      <a href="{% url 'film_ratings:film_details' film.movie_title.id %}">    
+                        <img 
+                          src="{{ film.movie_title.poster_url }}" 
+                          alt="Poster for {{ film.movie_title.title }}"
+                          class="w-15 h-auto rounded shadow-black shadow-sm lg:shadow-md"
+                        />
+                      </a>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ film.movie_title.title }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ film.movie_title.release_year }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ film.average_score|floatformat:2 }}
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+        </div>
+
+        
       </div>
     </div>
     

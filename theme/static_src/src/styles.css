@@ -32,6 +32,17 @@
   --color-dark-text: #FBDADE;
   --color-dark-text-2: #F0A8AB;
   --color-text-error: red;
+  
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
 }
 
 /**
