@@ -498,6 +498,9 @@
   .max-h-\[500px\] {
     max-height: 500px;
   }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
   .w-5 {
     width: calc(var(--spacing) * 5);
   }
@@ -509,6 +512,15 @@
   }
   .w-15 {
     width: calc(var(--spacing) * 15);
+  }
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
+  .w-24 {
+    width: calc(var(--spacing) * 24);
   }
   .w-32 {
     width: calc(var(--spacing) * 32);
