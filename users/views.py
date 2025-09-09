@@ -27,7 +27,8 @@ def register_view(request):
     if request.method == "POST":
         form = TailwindRegistrationForm(request.POST)
         if form.is_valid():
-            login(request, form.save())
+            user = form.save()
+            login(request, user)
             return redirect("film_ratings:index")
     else:
         form = TailwindRegistrationForm()
@@ -38,10 +39,8 @@ def login_view(request):
         form = TailwindAuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            if 'next' in request.POST:
-                return redirect(request.POST.get('next'))
-            else:
-                return redirect("users:dashboard")
+            redirect_to = request.POST.get("next") or request.GET.get("next") or "users:dashboard"
+            return redirect(redirect_to)
     else: 
         form = TailwindAuthenticationForm()
     return render(request, "users/login_view.html", { 'form' : form })

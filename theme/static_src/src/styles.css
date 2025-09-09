@@ -22,27 +22,17 @@
   --color-dark-3: #800E13;
   --color-dark-4: #95232A;
   --color-accent-dark: #E22030;
-  --color-light-bg: #F6F7F4;         /* soft, light gray with a hint of green */
-  --color-light-2: #E1E5E1;          /* subtle sage-gray for surfaces/cards */
-  --color-light-3: #CBD3CF;          /* muted eucalyptus tone for hover or emphasis */
-  --color-light-4: #A8B4AC;          /* soft green-gray for borders or tertiary accents */
-  --color-accent-light: #5E8370;     /* cool, desaturated green for buttons/links */
-  --color-light-text: #1F2A23;       /* deep charcoal with green undertone */
-  --color-light-text-2: #3F4F45;     /* medium gray-green for subtext or muted headings */  
+  --color-light-bg: #F6F7F4;
+  --color-light-2: #E1E5E1;
+  --color-light-3: #CBD3CF;
+  --color-light-4: #A8B4AC;
+  --color-accent-light: #5E8370;
+  --color-light-text: #1F2A23;
+  --color-light-text-2: #3F4F45;
   --color-dark-text: #FBDADE;
   --color-dark-text-2: #F0A8AB;
   --color-text-error: red;
-  
-}
-
-@layer utilities {
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE/Edge */
-    scrollbar-width: none;     /* Firefox */
-  }
+  --tracking-1: 0.08em;
 }
 
 /**

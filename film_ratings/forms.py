@@ -27,9 +27,23 @@ class MovieForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             if field_name != 'movie_title':
                 field.widget.attrs.update({
-                    'class': 'font-default text-center bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    'class': 'font-default text-center bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 })
             else:
                 field.widget.attrs.update({
                     'class': 'font-default text-center bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                })
+
+class MovieFormModal(MovieForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'movie_title':
+                field.widget.attrs.update({
+                    "class": (
+                        "h-8 w-full ml-auto rounded-md "
+                        "bg-light-4 dark:bg-dark-4 "
+                        "px-2 text-sm "
+                        "focus:outline-none focus:ring-2 focus:ring-accent-light dark:focus:ring-accent-dark"
+                    )
                 })

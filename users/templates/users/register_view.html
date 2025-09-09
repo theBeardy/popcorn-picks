@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="flex items-center justify-center">
-        <form class="flex justify-center w-full md:w-2xl" action="/users/login/" method="post">
+        <form class="flex justify-center w-full md:w-2xl" action="{% url 'users:register_view' %}" method="post">
             <div class="w-[80%]">
                 {% csrf_token %}
             {% for field in form %}

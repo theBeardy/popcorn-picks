@@ -47,18 +47,34 @@
                                 {% if field.label == "Fun_to_watch" %}
                                     This film is fun to watch
                                 {% elif field.label == "Crying" %}
-                                    <label class="text-light-text-2 dark:text-dark-text-2 relative group">
-                                        Crying
-                                        <span class="ml-1 text-light-4 dark:text-dark-4 cursor-pointer group relative">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                        <span class="absolute font-default bottom-full mb-2 w-48 px-2 py-1 text-sm text-white bg-gray-800 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                                            <p>0-5 = Active cringe</p>
-                                            <p>5 = Neutral</p>
-                                            <p>5-7 = I cried the first time, but not every time</p>
-                                            <p>8-10 = I cry everytime</p>
-                                        </span>
-                                        </span>
+                                    <label class="relative group">
+                                        This film is meaningful to me
                                     </label>
+                                    <span class="ml-1 text-light-4 dark:text-dark-4 cursor-pointer group relative">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                        <span class="scale-0 absolute bottom-full mb-2 w-48 px-2 py-1 text-sm text-light-text dark:text-dark-text bg-light-2 dark:bg-dark-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-opacity duration-300 z-10">
+                                            <p>I cry when a movie is meaningful to me. So this is my scale: </p>
+                                            <div class="w-[80%] mx-auto">
+                                                <p class="font-sans mb-0.5">0-5 = Active cringe</p>
+                                                <p class="font-sans mb-0.5">5 = Neutral</p>
+                                                <p class="font-sans mb-0.5">5-7 = I cried the first time, but not every time</p>
+                                                <p class="font-sans mb-0.5">8-10 = I cry everytime</p>
+                                            </div>
+                                            <p>Perfectly fine if your scale for meaning is different</p>
+                                        </span>
+                                    </span>
+                                {% elif field.label == "Visuals" %}
+                                    I love the visuals of this movie
+                                {% elif field.label == "Acting" %}
+                                    The acting is compelling
+                                {% elif field.label == "Meaning" %}
+                                    This film makes me think
+                                {% elif field.label == "Dialogue" %}
+                                    The dialog is memorable and interesting
+                                {% elif field.label == "Genre" %}
+                                    This film is a good execution of its genre
+                                {% elif field.label == "Rewatch" %}
+                                    I could rewatch this movie any time
                                 {% else %}
                                     {{ field.label }}
                                 {% endif %}
@@ -96,4 +112,5 @@
             });
         </script>
     </div>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
 {% endblock %}
