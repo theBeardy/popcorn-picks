@@ -20,6 +20,9 @@
                 {{ field.label }}
             </label>
             {{ field }}
+            {% if field.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ field.errors|join:", " }}</p>
+            {% endif %}
             {% endfor %}
             {% if request.GET.next %}
                 <input type="hidden" name="next" value="{{ request.GET.next }}" />

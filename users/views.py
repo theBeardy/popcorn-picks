@@ -4,6 +4,7 @@ from django.db.models import F, ExpressionWrapper, FloatField
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
+from django.contrib import messages
 from film_ratings.models import Movie, Review
 from film_ratings.views import film_details
 
@@ -29,7 +30,10 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, "Account created successfully! Welcome 🎉")
             return redirect("film_ratings:index")
+        else:
+            messages.error(request, "Please correct the errors below.")
     else:
         form = TailwindRegistrationForm()
     return render(request, "users/register_view.html", { 'form' : form })
@@ -39,8 +43,11 @@ def login_view(request):
         form = TailwindAuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
+            messages.success(request, "You are now logged in ✅")
             redirect_to = request.POST.get("next") or request.GET.get("next") or "users:dashboard"
             return redirect(redirect_to)
+        else: 
+            messages.error(request, "Invalid username or password.")
     else: 
         form = TailwindAuthenticationForm()
     return render(request, "users/login_view.html", { 'form' : form })
