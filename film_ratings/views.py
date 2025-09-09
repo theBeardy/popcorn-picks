@@ -293,7 +293,7 @@ def review_from_details(request, movie_id):
             title = movie.title
 
             # Save review
-            review = form.save(commit=False)
+            review = form.save()
             review.movie_title = movie  # ✅ This is a Movie instance now
             review.user = request.user
             review.save()
@@ -301,4 +301,20 @@ def review_from_details(request, movie_id):
     else:
         form = MovieFormModal()
 
-    return render(request, 'partials/small_form.html', {'form':form, 'movie':movie})
+    return render(request, 'partials/review_new.html', {'form':form, 'movie':movie})
+
+@login_required(login_url='/users/login/')
+def edit_review_view(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+
+    form = MovieFormModal(instance=movie)
+    if form.is_valid():
+        review = form.save()
+        review.movie_title = movie
+        review.user = request.user
+        review.save()
+        return redirect('film_ratings:index')
+    else:
+        form = MovieFormModal()
+        
+    return render(request, 'partials/review_new.html', {'form':form, 'movie':movie})
