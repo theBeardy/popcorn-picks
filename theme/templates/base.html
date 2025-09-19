@@ -3,7 +3,7 @@
 {% load static tailwind_tags %}
 <head>
     <title>{% block title %}Popcorn Picks{% endblock %}</title>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
     <script src="https://kit.fontawesome.com/b7e64cc3fa.js" crossorigin="anonymous"></script>
 	{% tailwind_css %}
@@ -95,7 +95,7 @@
     {% endif %}
     <div id="search-bar" class="pt-[60px]">
         <div class="fixed z-55 top-0 right-0 py-2 px-5 mt-20">
-            <div class="mx-auto max-w-md scale-125 lg:scale-100">
+            <div class="mx-auto max-w-md scale-100">
                 <form method="POST" action="{% url 'film_ratings:search_movies' %}" class="relative mx-auto w-max bg-light-2 dark:bg-dark-2 rounded-3xl">
                     {% csrf_token %}
                     <input 

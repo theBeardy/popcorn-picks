@@ -3,7 +3,7 @@
 {% load static tailwind_tags %}
 <head>
     <title>{% block title %}Popcorn Picks{% endblock %}</title>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
     <script src="https://kit.fontawesome.com/b7e64cc3fa.js" crossorigin="anonymous"></script>
 	{% tailwind_css %}
@@ -77,9 +77,25 @@
         </div>
         {% endblock %}
     </nav>
+    {% if messages %}
+        <div id="messages" class="fixed top-20 right-[50%] space-y-2 z-50">
+            {% for message in messages %}
+            <div class="
+                message {{ message.tags }}
+                px-4 py-2 rounded-md shadow-md font-default text-sm
+                {% if message.tags == 'success' %} bg-green-500 text-white
+                {% elif message.tags == 'error' %} bg-red-500 text-white
+                {% elif message.tags == 'warning' %} bg-yellow-500 text-black
+                {% else %} bg-gray-200 text-black {% endif %}
+            ">
+                {{ message }}
+            </div>
+            {% endfor %}
+  </div>
+    {% endif %}
     <div id="search-bar" class="pt-[60px]">
         <div class="fixed z-55 top-0 right-0 py-2 px-5 mt-20">
-            <div class="mx-auto max-w-md scale-125 lg:scale-100">
+            <div class="mx-auto max-w-md scale-100">
                 <form method="POST" action="{% url 'film_ratings:search_movies' %}" class="relative mx-auto w-max bg-light-2 dark:bg-dark-2 rounded-3xl">
                     {% csrf_token %}
                     <input 
@@ -110,12 +126,25 @@
             const suggestions = document.getElementById("search_autocomplete");
 
             if (searchInput && suggestions) {
-                searchInput.addEventListener("blur", function () {
+                searchInput.addEventListener("blur", function
+                () {
                     // Delay hiding suggestions so clicks can register
                     setTimeout(() => {
                         suggestions.innerHTML = "";
                     }, 200);
                 });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const messages = document.getElementById("messages");
+            if (messages) {
+            setTimeout(() => {
+                messages.style.transition = "opacity 0.5s ease";
+                messages.style.opacity = "0";
+                setTimeout(() => messages.remove(), 300); // wait for fade-out
+            }, 3000); // 3 seconds
             }
         });
     </script>
