@@ -10,7 +10,12 @@ from .forms import MovieForm, MovieFormModal
 from .utils import fetch_movie_data
 
 def index(request):
-    film_list = Movie.objects.annotate(average_rating=Avg('review__average')).order_by('-average_rating')
+    film_list = (
+	Movie.objects
+	.annotate(average_rating=Avg('review__average'))
+	.filter(average_rating__isnull=False)
+	.order_by('-average_rating')
+    )
     return render(request, "film_ratings/index.html", {"film_list": film_list})
 
 TMDB_API_KEY = settings.TMDB_API_KEY  

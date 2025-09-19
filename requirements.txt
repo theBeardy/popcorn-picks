@@ -10,6 +10,7 @@ gunicorn==23.0.0
 honcho==2.0.0
 idna==3.10
 packaging==25.0
+psycopg2-binary==2.9.10
 python-decouple==3.8
 requests==2.32.4
 sqlparse==0.5.3
