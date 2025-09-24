@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Movie, Review
-from .forms import MovieForm, MovieFormModal
+from .forms import MovieForm, MovieFormModal, ReviewForm
 from .utils import fetch_movie_data
 
 def index(request):
@@ -291,35 +291,29 @@ def new_film_form(request):
 @login_required(login_url='/users/login/')
 def review_from_details(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
-
-    form = MovieFormModal(request.POST)
-    if form.is_valid():
-            # Extract title from fake field
-            title = movie.title
-
-            # Save review
-            review = form.save()
-            review.movie_title = movie  # ✅ This is a Movie instance now
-            review.user = request.user
-            review.save()
-            return redirect('film_ratings:index')
+    existing = Review.objects.filter(movie_title=movie, user=request.user).first()
+    if existing:
+        context_flag = 'review_exists'
     else:
-        form = MovieFormModal()
+        context_flag = 'no_review_exists'
 
-    return render(request, 'partials/review_new.html', {'form':form, 'movie':movie})
-
-@login_required(login_url='/users/login/')
-def edit_review_view(request, movie_id):
-    movie = get_object_or_404(Movie, pk=movie_id)
-
-    form = MovieFormModal(instance=movie)
-    if form.is_valid():
-        review = form.save()
-        review.movie_title = movie
-        review.user = request.user
-        review.save()
-        return redirect('film_ratings:index')
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=existing)
+        if form.is_valid():
+                review = form.save(commit=False)
+                review.movie_title = movie
+                review.user = request.user
+                review.save()
+                return redirect('film_ratings:film_details', movie_id=movie.id)
     else:
-        form = MovieFormModal()
-        
-    return render(request, 'partials/review_new.html', {'form':form, 'movie':movie})
+        form = ReviewForm(instance=existing) if existing else ReviewForm()
+
+    return render(
+        request, 
+        'partials/review_new.html', 
+        {
+            'form':form, 
+            'movie':movie, 
+            'context': context_flag
+        }
+    )

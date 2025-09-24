@@ -20,13 +20,14 @@
         <form 
             method="POST"
             action="{% url 'film_ratings:review_new' movie.id %}"
-            hx-post="{% url 'film_ratings:review_new' movie.id %}"
             hx-target="#dialog-content"
             hx-swap="innerHTML"
             class="space-y-4"
         >
             {% csrf_token %}
             <div class="mt-4">
+                <input type="hidden" id="movie_id" name="movie_id" value={{ movie.id }}>
+                <input type="hidden" id="tmdb_id" name="tmdb_id" value={{ movie.tmdb_id }}>
                 {% for field in form %}
                     {% if field.name != 'movie_title' and field.name != 'average' and field.name != 'recommend' %}
                         <div class="grid grid-cols-3 rounded-md">
@@ -67,7 +68,11 @@
                                 {% endif %}
                             </label>
                             <div class="col-span-1 mb-2 flex gap-4">
+                                {% if context == 'review_exists' %}
+                                    {{ field }}
+                                {% else %}
                                 {{ field }}
+                                {% endif %}
                             </div>
                             {% if field.errors %}
                                 <p class="text-text-error text-sm mt-1">{{ field.errors }}</p>

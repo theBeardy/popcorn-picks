@@ -24,6 +24,14 @@ class Movie(models.Model):
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie_title = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['movie_title','user'],
+                name='unique_user_review_per_movie'
+            )
+        ]
     
     visuals = models.FloatField("visuals")
     acting = models.FloatField("acting")

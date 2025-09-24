@@ -11,6 +11,8 @@
   "scripts": {
     "dev": "npm run build:css & python manage.py runserver",
     "build:css": "postcss theme/static_src/src/styles.css -o theme/static/css/dist/styles.css"
+  },
+  "dependencies": {
+    "postcss-nested": "^7.0.2"
   }
 }
-

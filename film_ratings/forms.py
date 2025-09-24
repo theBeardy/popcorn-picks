@@ -9,7 +9,7 @@ class MovieForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        exclude = ['movie_title', 'user', 'movie_title']
+        exclude = ['user', 'movie_title']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -33,6 +33,23 @@ class MovieForm(forms.ModelForm):
                 field.widget.attrs.update({
                     'class': 'font-default text-base text-center bg-light-4 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-dark-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 })
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        exclude = ['user','movie_title','average']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({
+                "class": (
+                    "h-8 w-full ml-auto rounded-md "
+                    "bg-light-4 dark:bg-dark-4 "
+                    "px-2 text-sm "
+                    "focus:outline-none focus:ring-2 focus:ring-accent-light dark:focus:ring-accent-dark"
+                )
+            })
 
 class MovieFormModal(MovieForm):
     def __init__(self, *args, **kwargs):
