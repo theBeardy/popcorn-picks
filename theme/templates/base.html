@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-fixed bg-light-bg text-light-text-2 dark:text-dark-text-2 dark:bg-dark-bg h-screen">
-    <nav id="navbar" class="fixed bottom-0 left-0 right-0 h-12 lg:mt-0 lg:top-0 lg:left-0 lg:right-0 z-50 lg:h-16 bg-light-2 dark:bg-dark-2 dark:text-dark-text w-full shadow-md drop-shadow-black">
+    {% comment %} <nav id="navbar" class="fixed bottom-0 left-0 right-0 h-12 lg:mt-0 lg:top-0 lg:left-0 lg:right-0 z-50 lg:h-16 bg-light-2 dark:bg-dark-2 dark:text-dark-text w-full shadow-md drop-shadow-black">
         {% block sidebar %}
         <div class="flex justify-center lg:justify-between items-center h-full px-4">
             <!-- Left side navigation -->
@@ -51,7 +51,7 @@
                         <button class="text-xl h-[80%] w-[40px] bg-light-4 text-light-text dark:bg-dark-4 dark:text-dark-text rounded-md" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
-            </div> {% endcomment %}
+            </div>
 
             <!-- Right side authentication -->
             <ul class="flex lg:space-x-2">
@@ -76,6 +76,17 @@
             </ul>
         </div>
         {% endblock %}
+    </nav> {% endcomment %}
+    <nav>
+        <div class="fixed z-55 top-0 left-0 p-4">
+            <div class="flex justify-center h-12 w-12 bg-light-2 dark:bg-dark-2 rounded-full">
+                <img 
+                    src="{% static 'pcpicksLOGO.png' %}" 
+                    alt="PopCornPicks Logo"
+                    class="text-shadow-sm shadow-black"
+                >
+            </div>
+        </div>
     </nav>
     {% if messages %}
         <div id="messages" class="fixed top-20 right-[50%] space-y-2 z-50">
@@ -94,7 +105,7 @@
   </div>
     {% endif %}
     <div id="search-bar" class="pt-[60px]">
-        <div class="fixed z-55 top-0 right-0 py-2 px-5 mt-20">
+        <div class="fixed z-55 top-0 right-0 p-4">
             <div class="mx-auto max-w-md scale-100">
                 <form method="POST" action="{% url 'film_ratings:search_movies' %}" class="relative mx-auto w-max bg-light-2 dark:bg-dark-2 rounded-3xl">
                     {% csrf_token %}
