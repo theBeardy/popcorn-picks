@@ -1,22 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-  <h1 class="text-center object-center text-3xl font-default text-light-text dark:text-dark-text m-12">Your Reviewed Films</h1>
+  <h1 class="hidden sm:block text-center object-center text-3xl font-default text-light-text dark:text-dark-text m-12">Your Reviewed Films</h1>
   <div class="flex justify-center p-8">
     
     {% if user_review_data %}
-      <div class="flex justify-center m-4">
+      <div class="flex justify-center">
         <div class="w-full h-[60vh] relative overflow-y-scroll rounded-lg">
-          <table class="w-full text-sm text-left text-light-text dark:text-dark-text">
+          <table class="hidden sm:block w-full text-sm text-left text-light-text dark:text-dark-text">
               <thead class="sticky top-0 z-10 text-xs text-light-text-2 uppercase bg-light-3 dark:bg-dark-3 dark:text-dark-text-2">
                   <tr>
-                      {% comment %} <th scope="col" class="px-6 py-3">
-                          <div class="flex items-center">
-                            <a href="#" class="flex items-center">Overall Rank
-                              <i class="mx-2 fa-solid fa-sort"></i>
-                            </a>
-                          </div>
-                      </th> {% endcomment %}
                       <th scope="col" class="px-6 py-3">
                           
                       </th>
@@ -87,8 +80,43 @@
               </tbody>
           </table>
         </div>
+      </div>
+      <div id="mobile-dash" class="sm:hidden flex flex-col justify-center gap-6">
+        <div class="w-full mb-10 flex flex-col items-center">
+          <h1 class="text-center text-5xl font-logo">Your favorite film</h1>
+          {% for film in user_review_data|slice:':1' %}
+            <div class="m-12 text-light-text-2 dark:text-dark-text-2">
+              <div class="static">
+                <img 
+                  src="{{ film.movie_title.poster_url }}" 
+                  class=""
+                  alt="Poster for {{ film.movie_title.title }}"
+                >
+                <figcaption class="absolute px-4 text-lg text-white bottom-6">
+                  <h1 class="relative bottom-0 right-0 text-3xl font-alt">{{ film.movie_title.title }}</h1>
+                  <p>{{ film.movie_title.release_year }}</p>
+                </figcaption>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <h1 class="text-center text-2xl font-logo">Your top 10 favorite films</h1>
+        {% for film in user_review_data|slice:':10' %}
+          <div class="flex justify-center gap-2">
+            <div class="w-[80%] flex justify-between">
+              <img 
+                src="{{ film.movie_title.poster_url }}"
+                class="w-[160px] space-x-2" 
+                alt="Poster for {{ film.movie_title.title }}"
+              >
+              <div class="space-x-2">
+                <h1 class="justify-end text-right">{{ film.movie_title.title }}</h1>
+                <p class="justify-end text-right">{{ film.movie_title.release_year }}</p>
+              </div>
+            </div>
+          </div>
 
-        
+        {% endfor %}
       </div>
     </div>
     
