@@ -10,7 +10,53 @@
 </head>
 
 <body class="bg-fixed bg-light-bg text-light-text-2 dark:text-dark-text-2 dark:bg-dark-bg h-screen">
-    <nav id="navbar" class="fixed bottom-0 left-0 right-0 h-12 lg:mt-0 lg:top-0 lg:left-0 lg:right-0 z-50 lg:h-16 bg-light-2 dark:bg-dark-2 dark:text-dark-text w-full shadow-md drop-shadow-black">
+    <nav class="bg-light-2 border-gray-200 dark:bg-dark-2">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src='{% static 'pcpicksLOGO.png'%}' class="h-12" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-logo whitespace-nowrap text-light-text-2 text-shadow-sm text-shadow-light-3 dark:text-dark-text-2 dark:text-shadow-dark-3 dark:text-shadow-md">Popcorn Picks</span>
+            </a>
+            <div class="flex flex-col justify-center items-center 
+                        bg-light-3 dark:bg-dark-3 
+                        hover:bg-light-4 dark:hover:bg-dark-4 
+                        h-12 w-12 rounded-md">
+                <a href="{% url 'change-theme' %}">
+                    {% if is_dark_theme %}
+                        <i class="fa-solid fa-sun"></i>
+                    {% else %}
+                        <i class="fa-solid fa-moon"></i>
+                    {% endif %}
+                </a>
+            </div>
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+                </li>
+                <li>
+                <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
+                </li>
+                <li>
+                <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+                </li>
+                <li>
+                <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
+                </li>
+                <li>
+                <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% comment %} <nav id="navbar" class="hidden sm:block fixed bottom-0 left-0 right-0 h-12 lg:mt-0 lg:top-0 lg:left-0 lg:right-0 z-50 lg:h-16 bg-light-2 dark:bg-dark-2 dark:text-dark-text w-full shadow-md drop-shadow-black">
         {% block sidebar %}
         <div class="flex justify-center lg:justify-between items-center h-full px-4">
             <!-- Left side navigation -->
@@ -43,7 +89,7 @@
                 </div>
             </div>
             
-            {% comment %} <div class="hidden lg:flex lg:justify-center">
+            <div class="hidden lg:flex lg:justify-center">
                 <div class="flex justify-center z-100">
                     <form class="flex items-center h-auto" method=POST action="{% url 'film_ratings:search_movies' %}">
                         {% csrf_token %}
@@ -51,7 +97,7 @@
                         <button class="text-xl h-[80%] w-[40px] bg-light-4 text-light-text dark:bg-dark-4 dark:text-dark-text rounded-md" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
-            </div> {% endcomment %}
+            </div>
 
             <!-- Right side authentication -->
             <ul class="flex lg:space-x-2">
@@ -77,6 +123,17 @@
         </div>
         {% endblock %}
     </nav>
+    <nav class="visible sm:hidden">
+        <div class="fixed z-55 top-0 left-0 p-4">
+            <div class="flex justify-center h-12 w-12 bg-light-2 dark:bg-dark-2 rounded-full">
+                <img 
+                    src="{% static 'pcpicksLOGO.png' %}" 
+                    alt="PopCornPicks Logo"
+                    class="text-shadow-sm shadow-black"
+                >
+            </div>
+        </div>
+    </nav> {% endcomment %}
     {% if messages %}
         <div id="messages" class="fixed top-20 right-[50%] space-y-2 z-50">
             {% for message in messages %}
@@ -94,7 +151,7 @@
   </div>
     {% endif %}
     <div id="search-bar" class="pt-[60px]">
-        <div class="fixed z-55 top-0 right-0 py-2 px-5 mt-20">
+        <div class="fixed z-55 top-20 right-0 p-4">
             <div class="mx-auto max-w-md scale-100">
                 <form method="POST" action="{% url 'film_ratings:search_movies' %}" class="relative mx-auto w-max bg-light-2 dark:bg-dark-2 rounded-3xl">
                     {% csrf_token %}
@@ -134,6 +191,16 @@
                     }, 200);
                 });
             }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleButton = document.querySelector("[data-collapse-toggle='navbar-default']");
+            const menu = document.getElementById("navbar-default");
+
+            toggleButton.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+            });
         });
     </script>
     <script>

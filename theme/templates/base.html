@@ -10,84 +10,91 @@
 </head>
 
 <body class="bg-fixed bg-light-bg text-light-text-2 dark:text-dark-text-2 dark:bg-dark-bg h-screen">
-    {% comment %} <nav id="navbar" class="fixed bottom-0 left-0 right-0 h-12 lg:mt-0 lg:top-0 lg:left-0 lg:right-0 z-50 lg:h-16 bg-light-2 dark:bg-dark-2 dark:text-dark-text w-full shadow-md drop-shadow-black">
-        {% block sidebar %}
-        <div class="flex justify-center lg:justify-between items-center h-full px-4">
-            <!-- Left side navigation -->
-            <ul class="flex lg:space-x-2">
-                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
-                    <a href="{% url 'change-theme' %}">
+    <nav class="bg-light-2 border-gray-200 dark:bg-dark-2">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="flex items-center space-x-2">
+                <div class="flex justify-center items-center 
+                            bg-light-3 dark:bg-dark-3 
+                            hover:bg-light-4 dark:hover:bg-dark-4 
+                            rounded-md">
+                    <a href="{% url 'change-theme' %}" class="p-2">
                         {% if is_dark_theme %}
                             <i class="fa-solid fa-sun"></i>
                         {% else %}
                             <i class="fa-solid fa-moon"></i>
                         {% endif %}
                     </a>
-                </li>
-                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
-                    <a href="/"><i class="fa-solid fa-house-chimney"></i><p class="hidden sm:visible sm:inline ml-1">Home</p></a>
-                </li>
-                <li class="flex items-center ml-2 font-default overflow-x-hidden bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
-                    <a href="/film_ratings/movie_form/"><i class="fa-regular fa-star"></i><p class="hidden sm:visible sm:inline ml-1">Film Review</p></a>
-                </li>
-            </ul>
-
-            <div class="flex justify-center">
-                <div class="fixed lg:static top-0 left-0 right-0 flex justify-center h-14 w-full items-center bg-light-2 dark:bg-dark-2 lg:flex lg:justify-center lg:space-x-2 lg:w-[450px] shadow-md drop-shadow-black lg:shadow-none">
-                    <img 
-                        src="{% static 'pcpicksLOGO.png' %}" 
-                        alt="PopCornPicks Logo"
-                        class="h-[60px] text-shadow-sm"
-                    >
-                    <h1 class="font-logo text-shadow-black text-shadow-sm text-2xl sm:text-4xl text-light-4 dark:text-dark-4"><a href="{% url 'film_ratings:index' %}">Popcorn Picks</a></h1>
                 </div>
-            </div>
-            
-            {% comment %} <div class="hidden lg:flex lg:justify-center">
-                <div class="flex justify-center z-100">
-                    <form class="flex items-center h-auto" method=POST action="{% url 'film_ratings:search_movies' %}">
-                        {% csrf_token %}
-                        <input class="font-default text-center w-auto bg-light-3 dark:bg-dark-3 rounded-md p-3 mr-2" type="search" placeholder="Search for a movie" name="movie_search">
-                        <button class="text-xl h-[80%] w-[40px] bg-light-4 text-light-text dark:bg-dark-4 dark:text-dark-text rounded-md" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
-                </div>
-            </div>
 
-            <!-- Right side authentication -->
-            <ul class="flex lg:space-x-2">
+                <a href="" class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <img src='{% static 'pcpicksLOGO.png'%}' class="h-12" alt="Flowbite Logo" />
+                    <span class="self-center text-2xl font-logo whitespace-nowrap 
+                                text-light-text text-shadow-sm text-shadow-light-3 
+                                dark:text-dark-text dark:text-shadow-dark-3 dark:text-shadow-md">
+                        Popcorn Picks
+                    </span>
+                </a>
+            </div>
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-light-text rounded-lg md:hidden hover:bg-light-text-2 focus:outline-none focus:ring-2 focus:ring-accent-light dark:text-dark-text dark:hover:bg-dark-text-2 dark:focus:ring-accent-dark" aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 font-alt text-lg lg:text-xl">
+                <li>
+                <a href="/" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3" aria-current="page">Home</a>
+                </li>
+                <li>
+                <a href="/film_ratings/movie_form/" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Film Review</a>
+                </li>
                 {% if user.is_authenticated %}
-                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
-                    <a href="{% url 'users:dashboard' %}"><i class="fa-regular fa-circle-user"></i><p class="hidden sm:visible sm:inline ml-1">My Rated Films</p></a>
-                </li>
-                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
-                    <form action="{% url 'users:logout_view' %}" method='post'>
+                    <li>
+                    <a href="{% url 'users:dashboard' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Dashboard</a>
+                    </li>
+                    <li>
+                    <form class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3" action="{% url 'users:logout_view' %}" method='post'>
                         {% csrf_token %}
-                        <button title="User Logout"><i class="fa-solid fa-right-from-bracket"></i><p class="hidden sm:visible sm:inline ml-1">Logout</p></button>
+                        <button title="User Logout">Logout<i class="fa-solid fa-right-from-bracket ml-2"></i></button>
                     </form>
-                </li>
+                    </li>
                 {% else %}
-                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
-                    <a href="{% url 'users:login_view' %}"><i class="fa-solid fa-right-to-bracket"></i><p class="hidden sm:visible sm:inline ml-1">Login</p></a>
-                </li>
-                <li class="flex items-center ml-2 font-default bg-light-4 dark:bg-dark-4 text-light-text dark:text-dark-text px-4 py-1 hover:bg-light-3 dark:hover:bg-dark-3 hover:text-light-text dark:hover:text-dark-text h-full rounded-md shadow-sm">
-                    <a href="{% url 'users:register_view' %}"><i class="fa-solid fa-user-plus"></i><p class="hidden sm:visible sm:inline ml-1">Register</p></a>
-                </li>
+                    <li>
+                    <a href="{% url 'users:login_view' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Login<i class="fa-solid fa-right-to-bracket ml-2"></i></a>
+                    </li>
+                    <li>
+                    <a href="{% url 'users:register_view' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Register<i class="fa-solid fa-user-plus ml-2"></i></a>
+                    </li>
                 {% endif %}
             </ul>
-        </div>
-        {% endblock %}
-    </nav> {% endcomment %}
-    <nav>
-        <div class="fixed z-55 top-0 left-0 p-4">
-            <div class="flex justify-center h-12 w-12 bg-light-2 dark:bg-dark-2 rounded-full">
-                <img 
-                    src="{% static 'pcpicksLOGO.png' %}" 
-                    alt="PopCornPicks Logo"
-                    class="text-shadow-sm shadow-black"
-                >
             </div>
         </div>
     </nav>
+    <div id="search-bar" class="pt-[60px]">
+        <div class="">
+            <div class="mx-auto max-w-md scale-100">
+                <form method="POST" action="{% url 'film_ratings:search_movies' %}" class="relative mx-auto w-max bg-light-2 dark:bg-dark-2 rounded-3xl">
+                    {% csrf_token %}
+                    <input 
+                        type="search" 
+                        class="peer relative z-10 h-12 w-12 border-accent-light dark:border-accent-dark cursor-pointer rounded-full border-light-4 dark:border-dark-4 bg-transparent pl-12 outline-none focus:w-full focus:cursor-text focus:border-accent-light dark:focus:border-accent-dark focus:pl-16 focus:pr-4" 
+                        name="movie_search"
+                        placeholder="Search for a movie..."
+                        hx-get="{% url 'film_ratings:search_autocomplete' %}"
+                        hx-trigger="keyup changed delay:300ms"
+                        hx-target="#search_autocomplete"
+                        hx-swap="innerHTML"
+                        autocomplete="off"
+                    />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-y-0 my-auto h-8 w-12 border-r border-transparent stroke-light-text dark:stroke-dark-text px-3.5 peer-focus:border-light-text dark:peer-focus:border-dark-text peer-focus:stroke-light-text dark:peer-focus:stroke-dark-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <div id="search_autocomplete" class="absolute left-0 right-0 top-14"></div>
+                </form>
+            </div>
+        </div>
+    </div>
     {% if messages %}
         <div id="messages" class="fixed top-20 right-[50%] space-y-2 z-50">
             {% for message in messages %}
@@ -104,29 +111,6 @@
             {% endfor %}
   </div>
     {% endif %}
-    <div id="search-bar" class="pt-[60px]">
-        <div class="fixed z-55 top-0 right-0 p-4">
-            <div class="mx-auto max-w-md scale-100">
-                <form method="POST" action="{% url 'film_ratings:search_movies' %}" class="relative mx-auto w-max bg-light-2 dark:bg-dark-2 rounded-3xl">
-                    {% csrf_token %}
-                    <input 
-                        type="search" 
-                        class="peer relative z-10 h-12 w-12 cursor-pointer rounded-full border-light-4 dark:border-dark-4 bg-transparent pl-12 outline-none focus:w-full focus:cursor-text focus:border-accent-light dark:focus:border-accent-dark focus:pl-16 focus:pr-4" 
-                        name="movie_search"
-                        placeholder="Search for a movie..."
-                        hx-get="{% url 'film_ratings:search_autocomplete' %}"
-                        hx-trigger="keyup changed delay:300ms"
-                        hx-target="#search_autocomplete"
-                        hx-swap="innerHTML"
-                        autocomplete="off"
-                    />
-                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-y-0 my-auto h-8 w-12 border-r border-transparent stroke-light-text dark:stroke-dark-text px-3.5 peer-focus:border-light-text dark:peer-focus:border-dark-text peer-focus:stroke-light-text dark:peer-focus:stroke-dark-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <div id="search_autocomplete" class="absolute left-0 right-0 top-14"></div>
-                </form>
-            </div>
-        </div>
         {% block content %}{% endblock %}
     </div>
     <div class="h-28"></div>
@@ -145,6 +129,16 @@
                     }, 200);
                 });
             }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleButton = document.querySelector("[data-collapse-toggle='navbar-default']");
+            const menu = document.getElementById("navbar-default");
+
+            toggleButton.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+            });
         });
     </script>
     <script>
