@@ -1,22 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-  <h1 class="text-center object-center text-3xl font-default text-light-text dark:text-dark-text m-12">Your Reviewed Films</h1>
+  <h1 class="hidden sm:block text-center object-center text-3xl font-default text-light-text dark:text-dark-text m-12">Your Reviewed Films</h1>
   <div class="flex justify-center p-8">
     
     {% if user_review_data %}
-      <div class="flex justify-center m-4">
+      <div class="flex justify-center">
         <div class="w-full h-[60vh] relative overflow-y-scroll rounded-lg">
-          <table class="w-full text-sm text-left text-light-text dark:text-dark-text">
+          <table class="hidden sm:block w-full text-sm text-left text-light-text dark:text-dark-text">
               <thead class="sticky top-0 z-10 text-xs text-light-text-2 uppercase bg-light-3 dark:bg-dark-3 dark:text-dark-text-2">
                   <tr>
-                      {% comment %} <th scope="col" class="px-6 py-3">
-                          <div class="flex items-center">
-                            <a href="#" class="flex items-center">Overall Rank
-                              <i class="mx-2 fa-solid fa-sort"></i>
-                            </a>
-                          </div>
-                      </th> {% endcomment %}
                       <th scope="col" class="px-6 py-3">
                           
                       </th>
@@ -87,8 +80,94 @@
               </tbody>
           </table>
         </div>
+      </div>
+      <div id="mobile-dash" class="sm:hidden flex flex-col justify-center gap-6">
+        <div class="w-full mb-10 flex flex-col items-center">
+          <h1 class="text-center text-5xl font-logo">Your favorite film</h1>
+          {% for film in user_review_data|slice:':1' %}
+            <a href={% url 'film_ratings:film_details' film.movie_title.id %}>
+                <div class="m-12 text-light-text-2 dark:text-dark-text-2">
+                  <div class="relative group w-[300px] hover:scale-105 duration-500 ease-in">
+                    <img 
+                      src="{{ film.movie_title.poster_url }}" 
+                      class="w-[300px] aspect-2/3"
+                      alt="Poster for {{ film.movie_title.title }}"
+                    >
+                    <figcaption class="w-[300px] h-[450px] absolute px-4 
+                                      text-lg text-white bottom-0
+                                      bg-gradient-to-tr from-light-3 to-transparent dark:from-dark-3 dark:to-transparent
+                                      transition-all duration-500 ease-in-out">
+                      <h1 class="text-[100px] font-logo text-light-text dark:text-dark-text
+                                text-shadow-md text-shadow-gray-300 dark:text-shadow-gray-700"
+                                >#1
+                      </h1>
+                      <div class="">
+                        <div class="flex">
+                          <h1 class="font-alt text-3xl text-light-text dark:text-dark-text
+                                  text-shadow-md text-shadow-gray-300 dark:text-shadow-gray-700">
+                            {{ film.movie_title.title }} - 
+                          </h1>
+                          <h1 class="font-alt text-3xl text-light-text dark:text-dark-text
+                                    text-shadow-md text-shadow-gray-300 dark:text-shadow-gray-700">
+                            {{ film.average_score }}</h1>
+                        </div>
+                        <p class="text-xl font-logo text-light-text dark:text-dark-text
+                                  text-shadow-md text-shadow-gray-300 dark:text-shadow-gray-700">
+                          {{ film.movie_title.release_year }}
+                        </p>          
+                      </div>
+                    </figcaption>
+                  </div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+        <h1 class="text-center text-2xl font-logo">Your top 10 favorite films</h1>
+        {% for film in user_review_data|slice:':10' %}
+          <div class="bg-light-2 dark:bg-dark-2 w-[80%] mx-auto rounded-md shadow-sm shadow-gray-300 dark:shadow-gray-700">
+            <a
+              href={% url 'film_ratings:film_details' film.movie_title.id %}
+              class="w-[80%]"
+            >
+              <div class="flex justify-between gap-2">
+                <div class="flex justify-between w-auto">
+                  <img 
+                    src="{{ film.movie_title.poster_url }}"
+                    class="w-[150px] rounded-s-md" 
+                    alt="Poster for {{ film.movie_title.title }}"
+                  >
+                  <div class="flex flex-col justify-between">
+                    <div class="mt-12">
+                      <h1 class="text-xl font-logo ml-4 text-light-text dark:text-dark-text text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-800">{{ film.movie_title.title }}</h1>
+                      <p class="text-sm font-alt ml-4 text-light-text dark:text-dark-text text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-800">({{ film.movie_title.release_year }})</p>
+                    </div>
+                    <div class="w-auto m-12">
+                      <button 
+                        command="show-modal" 
+                        commandfor="dialog"
+                        hx-get="{% url 'film_ratings:review_new' film.movie_title.id %}"
+                        hx-target="#dialog-content"
+                        hx-swap="innerHTML"
+                        class="rounded-md w-24 bg-gray-950/5 px-2.5 py-1.5 text-md font-alt text-gray-900 hover:bg-gray-950/10 dark:bg-white/10 dark:text-white dark:inset-ring dark:inset-ring-white/5 dark:hover:bg-white/20 shadow-md shadow-gray-500"
+                      >Edit</button>
+                      <el-dialog>
+                        <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+                          <el-dialog-backdrop class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-gray-900/50"></el-dialog-backdrop>
 
-        
+                          <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+                            <el-dialog-panel id="dialog-content" class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg lg:max-w-5xl data-closed:sm:translate-y-0 data-closed:sm:scale-95 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10">
+                              <!-- Modal Content goes here-->
+                            </el-dialog-panel>
+                          </div>
+                        </dialog>
+                      </el-dialog>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
       </div>
     </div>
     
