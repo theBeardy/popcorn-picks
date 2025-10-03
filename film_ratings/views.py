@@ -16,6 +16,11 @@ def index(request):
 	.filter(average_rating__isnull=False)
 	.order_by('-average_rating')
     )
+
+    # Add rating_percentage field to each movie
+    for movie in film_list:
+        movie.rating_percentage = round(movie.average_rating * 10, 1)  # 7.8 → 78.0
+
     return render(request, "film_ratings/index.html", {"film_list": film_list})
 
 TMDB_API_KEY = settings.TMDB_API_KEY  

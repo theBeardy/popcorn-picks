@@ -5,10 +5,68 @@
 <h1 class="m-16 text-4xl text-center font-alt leading-none tracking-tight text-light-text md:text-5xl lg:text-6xl dark:text-dark-text text-shadow-md text-shadow-accent-light dark:text-shadow-accent-dark">Top 10 Films by Average Rating</h1>
 
 {% if film_list %}
-<div class="flex justify-center">
-    <div class="grid grid-cols-2 w-full gap-3 lg:grid-cols-5 lg:w-auto lg:h-auto lg:gap-6 lg:p-10">
+<div class="hidden sm:flex justify-center">
+    <div class="grid grid-cols-1 w-full gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 lg:w-auto lg:h-auto lg:gap-6 lg:p-10 overflow-hidden justify-items-center">
         {% for movie in film_list|slice:':10' %}
-        <a class="text-[16px] lg:h-[300px] xl:h-[500px] 2xl:h-[650px] text-light-text-2 hover:text-light-text dark:text-dark-text-2 dark:hover:text-dark-text hover:scale-105 duration-290" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
+        <a 
+            href={% url 'film_ratings:film_details' movie.id %}
+            class="w-[75%] sm:w-[85%] md:w-[92%]"
+        >
+            <div class="w-full sm:max-h-[1000px] max-h-[500px] [aspect-[2/3] 
+                    object-cover rounded-md mb-10
+                    text-light-text-2 dark:text-dark-text-2">
+              <div class="relative group w-[75%] sm:w-[85%] md:w-[92%] hover:scale-105 duration-500 ease-in">
+                <img 
+                  src="{{ movie.poster_url }}" 
+                  class="w-[75%] max-w-[275px] sm:w-[85%] md:w-[92%] aspect-2/3 rounded-md shadow-md shadow-black"
+                  alt="Poster for {{ film.movie_title.title }}"
+                >
+                <figcaption class="w-[75%] max-w-[275px] sm:w-[85%] md:w-[92%] h-[100%] 
+                                  absolute px-4 rounded-md
+                                  text-lg text-white bottom-0 opacity-0
+                                  bg-gradient-to-tr from-light-3 to-transparent dark:from-dark-3 dark:to-transparent
+                                  transition-all duration-500 ease-in-out 
+                                  group-hover:opacity-100">
+                  <h1 class="text-[4rem] font-logo text-center
+                            text-shadow-md text-shadow-black"
+                            >#{{ forloop.counter }}
+                  </h1>
+                  <div class="transform translate-y-[0px] group-hover:translate-y-[75px] 
+                              transition-transform duration-500 ease-in-out">
+                    <div class="flex flex-col">
+                      <h1 class="font-alt text-[clamp(0.75rem, 2vw, 1.25rem)]
+                                ml-4 lg:ml-2 truncate
+                                text-shadow-md text-shadow-black">
+                        {{ movie.title }}
+                      </h1>
+                    </div>
+                    <p class="text-lg ml-4 lg:ml-2 font-logo
+                              text-shadow-md text-shadow-black">
+                      ({{ movie.release_year }})
+                    </p>          
+                  </div>
+                  <!-- Progress pinned to bottom -->
+                    <div class="flex justify-center absolute bottom-6 left-0 w-full px-4 pb-2">
+                    <div class="w-[95%]">
+                        <div class="flex justify-between mb-1">
+                        <span class="text-sm text-white font-default">Average Rating</span>
+                        <span class="text-lg text-white font-default">{{ movie.average_rating|floatformat:1 }}</span>
+                        </div>
+                        <div class="w-full bg-gray-400 h-3 overflow-hidden rounded-md shadow-sm shadow-gray-800">
+                        <div 
+                            class="h-3 bg-white rounded-md origin-left transform scale-x-0 
+                                group-hover:scale-x-100 transition-transform duration-1500 ease-in-out"
+                            style="width: {{ movie.rating_percentage }}%"
+                        ></div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- End Progress -->
+                </figcaption>
+              </div>
+            </div>
+            </a>
+        {% comment %} <a class="text-[16px] lg:h-[300px] xl:h-[500px] 2xl:h-[650px] text-light-text-2 hover:text-light-text dark:text-dark-text-2 dark:hover:text-dark-text hover:scale-105 duration-290" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
             <div class="flex flex-col p-4">
                 <img
                     src="{{ movie.poster_url }}"
@@ -19,11 +77,36 @@
                     <p>#{{ forloop.counter }} - {{ movie.title }} ({{ movie.release_year }}) | Overall Rating: {{ movie.average_rating|floatformat:1 }}</p>
                 </div>
             </div>
-        </a>
+        </a> {% endcomment %}
         {% endfor %}
     </div>
+</div>
     {% else %}
         <p>No movies in this list.</p>
     {% endif %}
+<div class="flex flex-col justify-center sm:hidden">
+    {% for movie in film_list|slice:10 %}
+        <a 
+            href={% url 'film_ratings:film_details' movie.id %}
+            class=""
+        >
+            <div class="flex justify-center w-[90%] mb-12 mx-auto shadow-md shadow-gray-300 dark:shadow-black">
+                <div class="flex justify-between w-full bg-gradient-to-tr from-light-2 dark:from-dark-2 to-gray-300 dark:to-red-800 rounded-md">
+                    <div class="flex flex-col justify-between mb-8 mt-8">
+                        <span class="ml-8 mt-8 text-[50px] text-light-text-2 dark:text-dark-text-2 font-logo text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-700">#{{ forloop.counter }}</span>
+                        <div class="flex flex-col mb-8 w-[90%]">
+                            <span class="ml-8 text-xl font-logo text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-700">{{ movie.title }}</span>
+                            <span class="ml-8 text-lg font-alt text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-700">({{ movie.release_year }})</span>
+                        </div>
+                    </div>
+                    <img 
+                        src={{ movie.poster_url }} 
+                        alt="Poster for {{ movie.title }}"
+                        class="w-[250px] rounded-r-md"
+                    >
+                </div>
+            </div>
+        </a>
+    {% endfor %}
 </div>
 {% endblock %}
