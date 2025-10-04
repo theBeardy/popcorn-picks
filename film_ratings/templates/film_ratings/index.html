@@ -66,18 +66,6 @@
               </div>
             </div>
             </a>
-        {% comment %} <a class="text-[16px] lg:h-[300px] xl:h-[500px] 2xl:h-[650px] text-light-text-2 hover:text-light-text dark:text-dark-text-2 dark:hover:text-dark-text hover:scale-105 duration-290" href="{% url 'film_ratings:film_details' movie.id %}" data-item="{{ forloop.counter }}">
-            <div class="flex flex-col p-4">
-                <img
-                    src="{{ movie.poster_url }}"
-                    class="w-full sm:max-h-[1000px] max-h-[500px] [aspect-[2/3] object-cover rounded-md shadow-md shadow-black"
-                    alt="Poster image for {{ movie.title }}"
-                />
-                <div class="font-default text-md">
-                    <p>#{{ forloop.counter }} - {{ movie.title }} ({{ movie.release_year }}) | Overall Rating: {{ movie.average_rating|floatformat:1 }}</p>
-                </div>
-            </div>
-        </a> {% endcomment %}
         {% endfor %}
     </div>
 </div>
@@ -86,27 +74,49 @@
     {% endif %}
 <div class="flex flex-col justify-center sm:hidden">
     {% for movie in film_list|slice:10 %}
-        <a 
-            href={% url 'film_ratings:film_details' movie.id %}
-            class=""
-        >
-            <div class="flex justify-center w-[90%] mb-12 mx-auto shadow-md shadow-gray-300 dark:shadow-black">
-                <div class="flex justify-between w-full bg-gradient-to-tr from-light-2 dark:from-dark-2 to-gray-300 dark:to-red-800 rounded-md">
-                    <div class="flex flex-col justify-between mb-8 mt-8">
-                        <span class="ml-8 mt-8 text-[50px] text-light-text-2 dark:text-dark-text-2 font-logo text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-700">#{{ forloop.counter }}</span>
-                        <div class="flex flex-col mb-8 w-[90%]">
-                            <span class="ml-8 text-xl font-logo text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-700">{{ movie.title }}</span>
-                            <span class="ml-8 text-lg font-alt text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-700">({{ movie.release_year }})</span>
+        <div class="flex justify-center overflow-x-hidden">
+            <a 
+                href={% url 'film_ratings:film_details' movie.id %}
+                class="m-8 rounded-md"
+            >
+                <div class="flex flex-col w-[350px]">
+                    <div class="w-[350px]">
+                        <img 
+                            src={{ movie.poster_url }} 
+                            alt="Poster for {{ movie.title }}"
+                            class="w-[350px] rounded-t-md"
+                        >
+                    </div>
+                    <div class="flex justify-between items-center 
+                                w-full h-[155px] p-8
+                                bg-light-2 dark:bg-dark-2 rounded-b-md
+                    ">
+                        <div>
+                            <h1 class="text-2xl font-alt">{{ movie.title }}</h1>
+                            <span class="font-default">({{ movie.release_year }})</span>
+                        </div>
+                        <div class="">
+                            <!-- Gauge Component -->
+                            <div class="relative size-24 bg-light-2 dark:bg-dark-2 rounded-full">
+                            <svg class="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Background Circle (Gauge) -->
+                                <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-light-text dark:text-dark-text" stroke-width="1" stroke-dasharray="100 100"></circle>
+
+                                <!-- Gauge Progress -->
+                                <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-accent-light dark:text-accent-dark" stroke-width="2" stroke-dasharray="{{ movie.rating_percentage}} 100"></circle>
+                            </svg>
+
+                            <!-- Value Text -->
+                            <div class="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                                <span class="text-3xl font-alt text-accent-light dark:text-accent-dark">{{ movie.average_rating|floatformat:1 }}</span>
+                            </div>
+                            </div>
+                            <!-- End Gauge Component -->
                         </div>
                     </div>
-                    <img 
-                        src={{ movie.poster_url }} 
-                        alt="Poster for {{ movie.title }}"
-                        class="w-[250px] rounded-r-md"
-                    >
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}
