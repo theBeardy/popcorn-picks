@@ -82,6 +82,9 @@ def dashboard(request):
         .order_by('-average_score')
     )
 
+    for film in user_reviews:
+        film.rating_percentage = round(film.average_score * 10, 1)
+
     return render(request, "users/dashboard.html", {
         "user_review_data": user_reviews,
     })

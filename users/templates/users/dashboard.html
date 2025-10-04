@@ -123,51 +123,55 @@
           {% endfor %}
         </div>
         <h1 class="text-center text-2xl font-logo">Your top 10 favorite films</h1>
-        {% for film in user_review_data|slice:':10' %}
-          <div class="bg-light-2 dark:bg-dark-2 w-[80%] mx-auto rounded-md shadow-sm shadow-gray-300 dark:shadow-gray-700">
-            <a
-              href={% url 'film_ratings:film_details' film.movie_title.id %}
-              class="w-[80%]"
-            >
-              <div class="flex justify-between gap-2">
-                <div class="flex justify-between w-auto">
-                  <img 
-                    src="{{ film.movie_title.poster_url }}"
-                    class="w-[150px] rounded-s-md" 
-                    alt="Poster for {{ film.movie_title.title }}"
+          {% for film in user_review_data|slice:10 %}
+              <div class="flex justify-center overflow-x-hidden">
+                  <a 
+                      href={% url 'film_ratings:film_details' film.movie_title.id %}
+                      class="m-8 rounded-md"
                   >
-                  <div class="flex flex-col justify-between">
-                    <div class="mt-12">
-                      <h1 class="text-xl font-logo ml-4 text-light-text dark:text-dark-text text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-800">{{ film.movie_title.title }}</h1>
-                      <p class="text-sm font-alt ml-4 text-light-text dark:text-dark-text text-shadow-sm text-shadow-gray-300 dark:text-shadow-gray-800">({{ film.movie_title.release_year }})</p>
-                    </div>
-                    <div class="w-auto m-12">
-                      <button 
-                        command="show-modal" 
-                        commandfor="dialog"
-                        hx-get="{% url 'film_ratings:review_new' film.movie_title.id %}"
-                        hx-target="#dialog-content"
-                        hx-swap="innerHTML"
-                        class="rounded-md w-24 bg-gray-950/5 px-2.5 py-1.5 text-md font-alt text-gray-900 hover:bg-gray-950/10 dark:bg-white/10 dark:text-white dark:inset-ring dark:inset-ring-white/5 dark:hover:bg-white/20 shadow-md shadow-gray-500"
-                      >Edit</button>
-                      <el-dialog>
-                        <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
-                          <el-dialog-backdrop class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-gray-900/50"></el-dialog-backdrop>
-
-                          <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
-                            <el-dialog-panel id="dialog-content" class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg lg:max-w-5xl data-closed:sm:translate-y-0 data-closed:sm:scale-95 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10">
-                              <!-- Modal Content goes here-->
-                            </el-dialog-panel>
+                      <div class="flex flex-col w-[350px]">
+                          <div class="w-[350px]">
+                              <img 
+                                  src={{ film.movie_title.poster_url }} 
+                                  alt="Poster for {{ film.movie_title.title }}"
+                                  class="w-[350px] rounded-t-md"
+                              >
+                              <figcaption class="relative bottom-124 left-8 h-0">
+                                <span class="text-[70px] text-gray-200 font-logo text-shadow-md text-shadow-black">#{{ forloop.counter }}</span>
+                              </figcaption>
                           </div>
-                        </dialog>
-                      </el-dialog>
-                    </div>
-                  </div>
-                </div>
+                          <div class="flex justify-between items-center 
+                                      w-full h-[155px] p-8
+                                      bg-light-2 dark:bg-dark-2 rounded-b-md
+                          ">
+                              <div>
+                                  <h1 class="text-2xl font-alt">{{ film.movie_title.title }}</h1>
+                                  <span class="font-default">({{ film.movie_title.release_year }})</span>
+                              </div>
+                              <div class="">
+                                  <!-- Gauge Component -->
+                                  <div class="relative size-24 bg-light-2 dark:bg-dark-2 rounded-full">
+                                  <svg class="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                                      <!-- Background Circle (Gauge) -->
+                                      <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-light-text dark:text-dark-text" stroke-width="1.5" stroke-dasharray="100 100"></circle>
+
+                                      <!-- Gauge Progress -->
+                                      <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-accent-light dark:text-accent-dark" stroke-width="3" stroke-dasharray="{{ film.rating_percentage }} 100"></circle>
+                                  </svg>
+
+                                  <!-- Value Text -->
+                                  <div class="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                                      <span class="text-3xl font-alt text-accent-light dark:text-accent-dark">{{ film.average_score|floatformat:1 }}</span>
+                                  </div>
+                                  </div>
+                                  <!-- End Gauge Component -->
+                              </div>
+                          </div>
+                      </div>
+                  </a>
               </div>
-            </a>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
     </div>
     
