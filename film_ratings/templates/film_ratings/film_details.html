@@ -62,7 +62,7 @@
     </div>
   </div>
   {% if user.is_authenticated %}
-  <div class="fixed bottom-10 right-10">
+  {% comment %} <div class="fixed bottom-10 right-10">
     <div class="">
       <button 
         command="show-modal" 
@@ -84,6 +84,65 @@
         </dialog>
       </el-dialog>
     </div>
+  </div> {% endcomment %}
+  <div class="fixed bottom-10 right-10">
+    <button
+      id="openModal"
+      hx-get="{% url 'film_ratings:review_new' movie.id %}"
+      hx-target="#modal-content"
+      hx-swap="innerHTML"
+      class="rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10 dark:bg-white/10 dark:text-white dark:ring-1 dark:ring-white/5 dark:hover:bg-white/20"
+    >
+      Review this film
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div
+    id="modal"
+    class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm"
+  >
+    <div
+      class="relative w-[90%] max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6"
+    >
+      <!-- Close button -->
+      <button
+        id="closeModal"
+        class="absolute top-4 right-4 bg-light-2 flex justify-center items-center size-10 rounded-full dark:bg-dark-2 hover:scale-105"
+      >
+        <i class="fa-solid fa-circle-xmark fa-2xl text-accent-light dark:text-accent-dark"></i>
+      </button>
+
+      <!-- Modal content loaded by HTMX -->
+      <div id="modal-content">
+        <!-- HTMX will inject your form here -->
+      </div>
+    </div>
   </div>
   {% endif %}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const modal = document.getElementById("modal");
+      const openBtn = document.getElementById("openModal");
+      const closeBtn = document.getElementById("closeModal");
+
+      openBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+      });
+
+      // Optional: close when clicking outside modal box
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.add("hidden");
+          document.body.classList.remove("overflow-hidden");
+        }
+      });
+    });
+  </script>
 {% endblock %}

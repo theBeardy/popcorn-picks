@@ -59,13 +59,14 @@ class Review(models.Model):
         return round((sum(ratings) / len(ratings)), 2)
     
     def save(self, *args, **kwargs):
+        self.visuals = min(max(self.visuals, 1), 10)
+        self.acting = min(max(self.acting, 1), 10)
+        self.thought_provoking = min(max(self.thought_provoking, 1), 10)
+        self.dialog = min(max(self.dialog, 1), 10)
+        self.makes_me_cry = min(max(self.makes_me_cry, 1), 10)
+        self.genre_execution = min(max(self.genre_execution, 1), 10)
+        self.rewatchability = min(max(self.rewatchability, 1), 10)
+        self.fun_to_watch = min(max(self.fun_to_watch, 1), 10)
+
         self.average = self.average_rating()
-        self.visuals = min(self.visuals, 10)
-        self.acting = min(self.acting, 10)
-        self.thought_provoking = min(self.thought_provoking, 10)
-        self.dialog = min(self.dialog, 10)
-        self.makes_me_cry = min(self.makes_me_cry, 10)
-        self.genre_execution = min(self.genre_execution, 10)
-        self.rewatchability = min(self.rewatchability, 10)
-        self.fun_to_watch = min(self.fun_to_watch, 10)
         super().save(*args, **kwargs)

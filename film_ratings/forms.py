@@ -15,8 +15,8 @@ class MovieForm(forms.ModelForm):
         cleaned_data = super().clean()
         for field in ['visuals', 'acting', 'thought_provoking', 'dialog', 'makes_me_cry', 'genre_execution', 'rewatchability', 'fun_to_watch']:
             value = cleaned_data.get(field)
-            if value and value > 10:
-                cleaned_data[field] = 10
+            if value is not None:
+                cleaned_data[field] = max(1, min(value, 10))
         return cleaned_data
 
     # Optionally: to hide default model field so no conflict
