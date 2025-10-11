@@ -85,7 +85,7 @@
       </el-dialog>
     </div>
   </div> {% endcomment %}
-  <div class="fixed bottom-10 right-10">
+  <div class="flex p-6 sm:fixed bottom-10 right-10">
     <button
       id="openModal"
       hx-get="{% url 'film_ratings:review_new' movie.id %}"
@@ -103,7 +103,7 @@
     class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm"
   >
     <div
-      class="relative w-[90%] max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6"
+      class="relative max-w-3xl max-h-[90vh] p-6"
     >
       <!-- Close button -->
       <button
