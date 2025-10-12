@@ -14,7 +14,7 @@
             <img 
                 src={{ movie.poster_url }} 
                 alt="Poster for {{ movie.title }}"
-                class="w-32 mb-12"
+                class="w-32 mb-8"
             >
         </div>
         <form 
@@ -25,13 +25,13 @@
             class="space-y-4 p-6"
         >
             {% csrf_token %}
-            <div class="mt-4">
+            <div class="mx-auto bg-light-3 dark:bg-dark-3 p-2 w-full rounded-md">
                 <input type="hidden" id="movie_id" name="movie_id" value={{ movie.id }}>
                 <input type="hidden" id="tmdb_id" name="tmdb_id" value={{ movie.tmdb_id }}>
                 {% for field in form %}
                     {% if field.name != 'movie_title' and field.name != 'average' and field.name != 'recommend' %}
-                        <div class="flex flex-col">
-                            <label for="{{ field.id_for_label }}" class="text-xl text-center font-default text-light-text dark:text-dark-text">
+                        <div class="flex flex-col mx-auto my-6 py-6 w-[98%] bg-light-2 dark:bg-dark-2 rounded-md">
+                            <label for="{{ field.id_for_label }}" class="mx-auto text-2xl text-center font-default text-light-text dark:text-dark-text mb-2 w-[90%]">
                                 {% if field.label == "Fun_to_watch" %}
                                     This film is fun to watch
                                 {% elif field.label == "Crying" %}
@@ -41,7 +41,7 @@
                                     <div class="hidden sm:inline">
                                         <span class="ml-1 text-light-4 dark:text-dark-4 cursor-pointer group relative">
                                         <i class="fa-solid fa-circle-info"></i>
-                                            <span class="scale-0 absolute bottom-full mb-2 w-48 px-2 py-1 text-sm text-light-text dark:text-dark-text bg-light-2 dark:bg-dark-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-opacity duration-300 z-10">
+                                            <span class="scale-0 absolute bottom-full right-0 mb-2 w-48 px-2 py-1 text-sm text-light-text dark:text-dark-text bg-light-2 dark:bg-dark-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-opacity duration-300 z-10">
                                                 <p>I cry when a movie is meaningful to me. So this is my scale: </p>
                                                 <div class="w-[80%] mx-auto">
                                                     <p class="font-sans mb-0.5">0-5 = Active cringe</p>
@@ -69,7 +69,7 @@
                                     {{ field.label }}
                                 {% endif %}
                             </label>
-                            <div class="col-span-1 mb-2 flex gap-4">
+                            <div class="mx-auto w-[35%]">
                                 {{ field }}
                             </div>
                             {% if field.errors %}
@@ -79,8 +79,11 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <div class="mt-[50px]">
-                <button type="submit" class="font-default text-xl w-[200px] text-light-text-2 bg-light-3  hover:bg-accent-light dark:text-dark-text-2 dark:bg-dark-3 dark:hover:bg-accent-dark dark:hover:text-dark-text duration-250 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Submit</button>
+            <div class="flex justify-center">
+                <div class="">
+                    <button type="submit" class="font-default text-xl w-[200px] text-light-text-2 bg-light-3  hover:bg-accent-light dark:text-dark-text-2 dark:bg-dark-3 shadow-sm shadow-grey-600
+                    dark:hover:bg-accent-dark dark:hover:text-dark-text duration-250 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Submit</button>
+                </div>
             </div>
         </form>
     </div>

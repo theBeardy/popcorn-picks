@@ -39,7 +39,7 @@
 
       <!-- Description -->
       {% if movie.description %}
-      <p class="mb-6 text-light-text dark:text-dark-text">
+      <p class="mb-6 font-figtree text-light-text dark:text-dark-text">
         <strong>Description:</strong> {{ movie.description }}
       </p>
       {% endif %}
@@ -91,9 +91,9 @@
       hx-get="{% url 'film_ratings:review_new' movie.id %}"
       hx-target="#modal-content"
       hx-swap="innerHTML"
-      class="rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10 dark:bg-white/10 dark:text-white dark:ring-1 dark:ring-white/5 dark:hover:bg-white/20"
-    >
-      Review this film
+      class="rounded-md bg-gray-950/5 px-2.5 py-1.5 sm:text-sm font-alt text-gray-900 hover:bg-gray-950/10 dark:bg-white/10 dark:text-white dark:ring-1 dark:ring-white/5 dark:hover:bg-white/20"
+    > <i class="fa-solid fa-pen mr-2"></i>
+      Review this film 
     </button>
   </div>
 
