@@ -45,27 +45,27 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 font-alt text-lg lg:text-xl">
                 <li>
-                <a href="/" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3" aria-current="page">Home</a>
+                <a href="/" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text" aria-current="page">Home</a>
                 </li>
                 <li>
-                <a href="/film_ratings/movie_form/" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Film Review</a>
+                <a href="/film_ratings/movie_form/" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text">Film Review</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li>
-                    <a href="{% url 'users:dashboard' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Dashboard</a>
+                    <a href="{% url 'users:dashboard' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text">Dashboard</a>
                     </li>
                     <li>
-                    <form class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3" action="{% url 'users:logout_view' %}" method='post'>
+                    <form class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text" action="{% url 'users:logout_view' %}" method='post'>
                         {% csrf_token %}
                         <button title="User Logout">Logout<i class="fa-solid fa-right-from-bracket ml-2"></i></button>
                     </form>
                     </li>
                 {% else %}
                     <li>
-                    <a href="{% url 'users:login_view' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Login<i class="fa-solid fa-right-to-bracket ml-2"></i></a>
+                    <a href="{% url 'users:login_view' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text">Login<i class="fa-solid fa-right-to-bracket ml-2"></i></a>
                     </li>
                     <li>
-                    <a href="{% url 'users:register_view' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text hover:bg-light-3 dark:hover:bg-dark-3">Register<i class="fa-solid fa-user-plus ml-2"></i></a>
+                    <a href="{% url 'users:register_view' %}" class="block py-2 px-3 text-light-text rounded-sm md:bg-transparent md:p-0 dark:text-dark-text">Register<i class="fa-solid fa-user-plus ml-2"></i></a>
                     </li>
                 {% endif %}
             </ul>

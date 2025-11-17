@@ -14,7 +14,7 @@
             <img 
                 src={{ movie.poster_url }} 
                 alt="Poster for {{ movie.title }}"
-                class="w-32 mb-8"
+                class="w-32"
             >
         </div>
         <form 
@@ -25,13 +25,13 @@
             class="space-y-4 p-6"
         >
             {% csrf_token %}
-            <div class="mx-auto bg-light-3 dark:bg-dark-3 p-2 w-full rounded-md">
+            <div class="mx-auto p-2 w-full rounded-md">
                 <input type="hidden" id="movie_id" name="movie_id" value={{ movie.id }}>
                 <input type="hidden" id="tmdb_id" name="tmdb_id" value={{ movie.tmdb_id }}>
                 {% for field in form %}
                     {% if field.name != 'movie_title' and field.name != 'average' and field.name != 'recommend' %}
-                        <div class="flex flex-col mx-auto my-6 py-6 w-[98%] bg-light-2 dark:bg-dark-2 rounded-md">
-                            <label for="{{ field.id_for_label }}" class="mx-auto text-2xl text-center font-default text-light-text dark:text-dark-text mb-2 w-[90%]">
+                        <div class="flex flex-col mx-auto my-4 py-6 w-[98%] bg-light-2 dark:bg-dark-2 rounded-md">
+                            <label for="{{ field.id_for_label }}" class="mx-auto text-2xl font-default text-light-text dark:text-dark-text mb-2 w-[90%]">
                                 {% if field.label == "Fun_to_watch" %}
                                     This film is fun to watch
                                 {% elif field.label == "Crying" %}
@@ -69,7 +69,7 @@
                                     {{ field.label }}
                                 {% endif %}
                             </label>
-                            <div class="mx-auto w-[35%]">
+                            <div class="mx-auto w-[90%]">
                                 {{ field }}
                             </div>
                             {% if field.errors %}
